@@ -1,0 +1,7 @@
+[package]
+name = "quicli"
+version = "0.1.0"
+authors = ["Pascal Hertleif <killercup@gmail.com>"]
+repository = "https://github.com/killercup/quicli"
+
+[dependencies]
