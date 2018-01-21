@@ -1,7 +1,18 @@
 [package]
 name = "quicli"
 version = "0.1.0"
+description = "Quickly build cool CLI apps in Rust."
 authors = ["Pascal Hertleif <killercup@gmail.com>"]
+readme = "Readme.md"
 repository = "https://github.com/killercup/quicli"
 
 [dependencies]
+failure = "0.1.1"
+failure_derive = "0.1.1"
+serde = "1.0.27"
+serde_derive = "1.0.27"
+structopt = "0.1.6"
+structopt-derive = "0.1.6"
+
+[dev-dependencies]
+reqwest = "0.8.3"
