@@ -18,7 +18,7 @@ Quickly build cool CLI apps in Rust.
 
     ```toml
     [dependencies]
-    quicli = { git = "https://github.com/killercup/quicli" }
+    quicli = "0.1"
     ```
 
 2. Now, open up your `src/main.rs`. First, let's import all the good stuff:

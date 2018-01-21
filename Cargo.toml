@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Quickly build cool CLI apps in Rust."
 authors = ["Pascal Hertleif <killercup@gmail.com>"]
 readme = "Readme.md"
+license = "MIT OR Apache-2.0"
 repository = "https://github.com/killercup/quicli"
+categories = ["command-line-interface"]
+keywords = ["cli", "prelude"]
 
 [dependencies]
 failure = "0.1.1"
