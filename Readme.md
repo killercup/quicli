@@ -13,22 +13,22 @@ Quickly build cool CLI apps in Rust.
 
 ## Get started
 
-0. Create a new Rust binary project called "head" with `cargo new --bin head`.
-1. Add _quicli_ as an dependency in your `Cargo.toml`:
+1. Create a new Rust binary project called "head" with `cargo new --bin head`.
+2. Add _quicli_ as an dependency in your `Cargo.toml`:
 
     ```toml
     [dependencies]
     quicli = "0.1"
     ```
 
-2. Now, open up your `src/main.rs`. First, let's import all the good stuff:
+3. Now, open up your `src/main.rs`. First, let's import all the good stuff:
 
     ```rust
     #[macro_use] extern crate quicli;
     use quicli::prelude::*;
     ```
 
-3. Now, quickly write a cool CLI (it's also okay to type slowly):
+4. Now, quickly write a cool CLI (it's also okay to type slowly):
 
     ```rust
     // Add cool slogan for your app here, e.g.:
@@ -51,13 +51,13 @@ Quickly build cool CLI apps in Rust.
     });
     ```
 
-4. Give it a spin!
+5. Give it a spin!
 
-    0. `cargo run` it! Did you see a nice error?
-    1. What does `cargo run -- Cargo.toml` show you?
-    2. How about `cargo run -- Cargo.toml --count=4` or `cargo run -- Cargo.toml -n 2`?
-    3. `cargo run -- --help` -- how cool is that?
-    4. More fun: Try `--cont 4` (with the missing u).
+    1. `cargo run` it! Did you see a nice error?
+    2. What does `cargo run -- Cargo.toml` show you?
+    3. How about `cargo run -- Cargo.toml --count=4` or `cargo run -- Cargo.toml -n 2`?
+    4. `cargo run -- --help` -- how cool is that?
+    5. More fun: Try `--cont 4` (with the missing u).
 
 ## Thanks
 
