@@ -14,8 +14,7 @@ struct Cli {
     file: String,
 }
 
-main!({
-    let args = Cli::from_args();
+main!(|args: Cli| {
     let data = read_file(args.file)?;
     data.lines().take(args.count).for_each(|line| println!("{}", line));
 });

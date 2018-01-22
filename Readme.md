@@ -28,12 +28,14 @@ Quickly build cool CLI apps in Rust.
     serde = "1"
     ```
 
-3. Now, open up your `src/main.rs`. First, let's import all the good stuff:
+3. Now, open up your `src/main.rs`. Let's import all the good stuff:
 
     ```rust
     #[macro_use] extern crate quicli;
     use quicli::prelude::*;
     ```
+    
+    That's it. That's all the imports you should need for now.
 
 4. Now, quickly write a cool CLI (it's also okay to type slowly):
 
@@ -49,11 +51,14 @@ Quickly build cool CLI apps in Rust.
         // Add a positional argument that the user has to supply:
         /// The file to read
         file: String,
+        /// Pass many times for more log output
+        #[structopt(long = "verbosity", short = "v")]
+        verbosity: u64,
     }
 
-    main!({
-        let args = Cli::from_args();
-        let data = read_file(args.file)?;
+    main!(|args: Cli, log_level: verbosity| {
+        let data = read_file(&args.file)?;
+        info!("Reading first {} lines of {:?}", args.count, args.file);
         data.lines().take(args.count).for_each(|line| println!("{}", line));
     });
     ```
@@ -65,6 +70,8 @@ Quickly build cool CLI apps in Rust.
     3. How about `cargo run -- Cargo.toml --count=4` or `cargo run -- Cargo.toml -n 2`?
     4. `cargo run -- --help` -- how cool is that?
     5. More fun: Try `--cont 4` (with the missing u).
+    6. You like log messages? That's what we added the `verbosity` field for!
+       Give `cargo run -- Cargo.toml -vv` a try!
 
 ## Thanks
 

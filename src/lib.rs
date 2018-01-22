@@ -12,6 +12,9 @@ extern crate structopt;
 #[macro_use] extern crate failure_derive;
 #[macro_use] extern crate failure;
 
+#[macro_use] extern crate log;
+extern crate env_logger;
+
 mod fs;
 mod main_macro;
 
@@ -26,6 +29,8 @@ mod reexports {
 
     #[doc(hidden)] pub use failure_derive::*;
     #[doc(hidden)] pub use failure::*;
+
+    #[doc(hidden)] pub use log::*;
 }
 
 /// Prelude – import all of this
@@ -42,4 +47,7 @@ pub mod prelude {
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
     pub use fs::{read_file, write_to_file};
+
+    #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;
+    #[doc(hidden)] pub use log::Level as LogLevel;
 }

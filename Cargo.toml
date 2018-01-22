@@ -16,6 +16,8 @@ serde = "1.0.27"
 serde_derive = "1.0.27"
 structopt = "0.1.6"
 structopt-derive = "0.1.6"
+log = "0.4.1"
+env_logger = "0.5.3"
 
 [dev-dependencies]
 reqwest = "0.8.3"
