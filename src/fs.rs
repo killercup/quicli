@@ -35,7 +35,9 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String, Error> {
     Ok(result)
 }
 
-/// Read file content into string
+/// Write string to file
+///
+/// _Note:_ Replaces the current file content if the file already exists.
 ///
 /// # Examples
 ///
