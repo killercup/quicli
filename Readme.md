@@ -65,7 +65,7 @@ This is only possible because of all the awesome libraries included here:
 
 - Structopt and Clap for the nice CLI with awesome argument handling, great
   error messages, and nice composability!
-- Serde for handling all things serializing and deserilizing
+- Serde for handling all things serializing and deserializing
 - failure for ergonomic error handling.
 - …and more to come!
 
