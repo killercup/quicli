@@ -20,6 +20,13 @@ Quickly build cool CLI apps in Rust.
     [dependencies]
     quicli = "0.1"
     ```
+    
+    And, to be able to use all the features, also add these two goodies:
+    
+    ```toml
+    structopt = "0.1"
+    serde = "1"
+    ```
 
 3. Now, open up your `src/main.rs`. First, let's import all the good stuff:
 
