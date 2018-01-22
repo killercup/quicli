@@ -62,6 +62,13 @@ Quickly build cool CLI apps in Rust.
         data.lines().take(args.count).for_each(|line| println!("{}", line));
     });
     ```
+    
+    (You can find out about the possible attributes on the Cli struct in
+    [structopt's documentation]. You can find out more about the main macro in
+    [quicli's API documentaton].)
+    
+    [structopt's documentation]: https://docs.rs/structopt-derive/0.1.6/structopt_derive/
+    [quicli's API documentaton]: https://docs.rs/quicli/0.1.1/quicli/macro.main.html
 
 5. Give it a spin!
 
