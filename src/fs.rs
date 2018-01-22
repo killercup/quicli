@@ -1,3 +1,8 @@
+//! Some helpful functions to deal with file system operations.
+//!
+//! These are rather simple, but provide a quick and easy way to to common
+//! tasks. Also, they have great error messages.
+
 use std::path::Path;
 use std::io::{Read, Write};
 use std::fs::File;

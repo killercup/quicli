@@ -15,7 +15,7 @@ extern crate structopt;
 #[macro_use] extern crate log;
 extern crate env_logger;
 
-mod fs;
+pub mod fs;
 mod main_macro;
 
 mod reexports {
