@@ -18,6 +18,8 @@ extern crate structopt;
 #[macro_use] extern crate log;
 extern crate env_logger;
 
+extern crate rayon;
+
 pub mod fs;
 mod main_macro;
 
@@ -34,6 +36,8 @@ mod reexports {
     #[doc(hidden)] pub use failure::*;
 
     #[doc(hidden)] pub use log::*;
+
+    pub use rayon::prelude::*;
 }
 
 /// Prelude – import all of this
