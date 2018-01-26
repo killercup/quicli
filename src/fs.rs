@@ -6,7 +6,7 @@
 extern crate glob;
 
 use std::path::Path;
-use std::io::{Read, Write};
+use std::io::{Read, Write, BufReader, BufWriter};
 use std::fs::File;
 
 use failure::{Error, ResultExt};
@@ -32,8 +32,10 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
     let path = path.as_ref();
     ensure!(path.exists() && path.is_file(), "Path {:?} is not a file!", path);
 
-    let mut file = File::open(path)
+    let file = File::open(path)
         .with_context(|_| format!("Could not open file {:?}", path))?;
+    let mut file = BufReader::new(file);
+
     let mut result = String::new();
     file.read_to_string(&mut result)
         .with_context(|_| format!("Could not read file {:?}", path))?;
@@ -58,10 +60,11 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
 pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
     let path = path.as_ref();
 
-    let mut f = File::create(path)
+    let file = File::create(path)
         .with_context(|_| format!("Could not create/open file {:?}", path))?;
+    let mut file = BufWriter::new(file);
 
-    f.write_all(content.as_bytes())
+    file.write_all(content.as_bytes())
         .with_context(|_| format!("Could not write to file {:?}", path))?;
 
     Ok(())
