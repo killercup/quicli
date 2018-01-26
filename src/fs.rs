@@ -13,6 +13,8 @@ use failure::{Error, ResultExt};
 
 use prelude::Result;
 
+pub use std::fs::create_dir_all as create_dir;
+
 /// Read file content into string
 ///
 /// # Examples
