@@ -9,6 +9,8 @@ use std::fs::File;
 
 use failure::{Error, ResultExt};
 
+use prelude::Result;
+
 /// Read file content into string
 ///
 /// # Examples
@@ -22,7 +24,7 @@ use failure::{Error, ResultExt};
 /// assert!(x.len() > 0);
 /// # Ok(()) }
 /// ```
-pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String, Error> {
+pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
     let path = path.as_ref();
     ensure!(path.exists() && path.is_file(), "Path {:?} is not a file!", path);
 
@@ -49,7 +51,7 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String, Error> {
 /// write_to_file("/tmp/asdasidz81zasda", "foobar")?;
 /// # Ok(()) }
 /// ```
-pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<(), Error> {
+pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
     let path = path.as_ref();
 
     let mut f = File::create(path)
