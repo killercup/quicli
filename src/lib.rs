@@ -20,6 +20,7 @@ extern crate env_logger;
 
 pub mod fs;
 mod main_macro;
+mod errors;
 
 mod reexports {
     #[doc(hidden)] pub use serde_derive::*;
@@ -46,8 +47,7 @@ mod reexports {
 pub mod prelude {
     pub use reexports::*;
 
-    /// A handy alias for `Result` that carries a generic error type.
-    pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
+    pub use errors::{Result, NoneErrorContext};
 
     pub use fs::{read_file, write_to_file};
 
