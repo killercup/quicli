@@ -1,6 +1,4 @@
----
-title: Get started with quicli
----
+# Get started with quicli
 
 We are going to create a small CLI tool
 that outputs the first `n` lines of a given file.
