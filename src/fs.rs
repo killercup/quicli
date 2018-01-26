@@ -3,6 +3,8 @@
 //! These are rather simple, but provide a quick and easy way to to common
 //! tasks. Also, they have great error messages.
 
+extern crate glob;
+
 use std::path::Path;
 use std::io::{Read, Write};
 use std::fs::File;
@@ -61,4 +63,36 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
         .with_context(|_| format!("Could not write to file {:?}", path))?;
 
     Ok(())
+}
+
+/// Find files with glob pattern
+///
+/// Search for a pattern like `*.md` and get an iterator of Markdown files.
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate quicli;
+/// # use quicli::prelude::*;
+/// # fn main() { run().unwrap() }
+/// # fn run() -> Result<()> {
+/// let markdown_files = glob("*.md")?;
+/// assert_eq!(markdown_files.count(), 1);
+///
+/// let weird_files = glob("**/*.weird");
+/// assert!(weird_files.is_err());
+/// if let Err(e) = weird_files {
+///     assert_eq!(e.to_string(), "No files match pattern `**/*.weird`".to_string());
+/// }
+/// # Ok(()) }
+/// ```
+pub fn glob(pattern: &str) -> Result<::std::iter::Peekable<self::glob::Paths>> {
+    use self::glob::{glob_with, MatchOptions};
+
+    let options: MatchOptions = Default::default();
+    let mut files = glob_with(pattern, &options)?.peekable();
+
+    ensure!(files.peek().is_some(), "No files match pattern `{}`", pattern);
+
+    Ok(files)
 }

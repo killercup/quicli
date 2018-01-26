@@ -53,7 +53,7 @@ pub mod prelude {
     /// A handy alias for `Result` that carries a generic error type.
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
-    pub use fs::{read_file, write_to_file};
+    pub use fs::*;
 
     #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;
     #[doc(hidden)] pub use log::Level as LogLevel;
