@@ -1,6 +1,12 @@
 language: rust
-rust:
-- stable
+matrix:
+  include:
+  - rust: stable
+    env: DANCE=OVER_ALL_THE_CRATES
+  - rust: stable
+    env: DANCE=DOCS_WALTZ
+    before_script: cargo install waltz_cli
+    script: docs/_test.sh
 notifications:
   email:
     on_success: never

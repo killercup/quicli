@@ -1,0 +1,11 @@
+title: quicli
+description: Quickly build cool CLI apps in Rust.
+
+remote_theme: killercup/jekyll-theme-rustguides
+colors:
+  brand: "#3e5aa5"
+
+markdown: CommonMark
+plugins:
+- jekyll-readme-index
+- jekyll-optional-front-matter
