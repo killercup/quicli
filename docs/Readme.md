@@ -1,5 +1,19 @@
 # Get started with quicli
 
+quicli is a neat little framework for quickly writing CLI applications in Rust.
+
+We carefully selected the best tools the ecosystem has to offer,
+coupled them with an opinioned setup,
+and wrote some helpful guides.
+quicli enables you to concentrate on your application code,
+and gives you features like
+powerful CLI argument handling,
+great error messages,
+and logging
+without you needing to think about it.
+
+But enough of the sales talk, let's build something!
+How about this:
 We are going to create a small CLI tool
 that outputs the first `n` lines of a given file.
 
