@@ -83,7 +83,7 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// # fn main() { run().unwrap() }
 /// # fn run() -> Result<()> {
 /// let markdown_files = glob("*.md")?;
-/// assert_eq!(markdown_files.len(), 1);
+/// assert_eq!(markdown_files.len(), 2);
 ///
 /// let weird_files = glob("**/*.weird");
 /// assert!(weird_files.is_err());
