@@ -329,6 +329,6 @@ Now, let's print that number and we are done!
    [1](https://i.imgur.com/S9ajSF3.jpg)
    [2](https://i.redd.it/dtne9fvkilsz.png)
    [3](https://i.redd.it/e3xrc6iqg4az.jpg)
-2. `cargo run -- "rust_memes/*"
+2. `cargo run -- "rust_memes/*"`
 3. ???
 4. PROFIT!
