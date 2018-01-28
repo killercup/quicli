@@ -268,6 +268,8 @@ All we need to do is change the above `.iter()` to `.par_iter()`
 and thanks to the power of [Rayon] (which quilci includes)
 we are good to go!
 
+[Rayon]: https://docs.rs/rayon/
+
 ```rust,file=src/main.rs
     let thumbnails = files
         .par_iter()
