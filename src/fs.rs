@@ -5,9 +5,10 @@
 
 extern crate glob;
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::io::{Read, Write, BufReader, BufWriter};
 use std::fs::File;
+use std::result::Result as StdResult;
 
 use failure::{Error, ResultExt};
 
@@ -82,7 +83,7 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// # fn main() { run().unwrap() }
 /// # fn run() -> Result<()> {
 /// let markdown_files = glob("*.md")?;
-/// assert_eq!(markdown_files.count(), 1);
+/// assert_eq!(markdown_files.len(), 1);
 ///
 /// let weird_files = glob("**/*.weird");
 /// assert!(weird_files.is_err());
@@ -91,13 +92,16 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// }
 /// # Ok(()) }
 /// ```
-pub fn glob(pattern: &str) -> Result<::std::iter::Peekable<self::glob::Paths>> {
+pub fn glob(pattern: &str) -> Result<Vec<PathBuf>> {
     use self::glob::{glob_with, MatchOptions};
 
     let options: MatchOptions = Default::default();
-    let mut files = glob_with(pattern, &options)?.peekable();
+    let files: Vec<_> = glob_with(pattern, &options)?
+        .filter_map(StdResult::ok)
+        .collect();
 
-    ensure!(files.peek().is_some(), "No files match pattern `{}`", pattern);
+    ensure!(files.get(0).is_some(), "No files match pattern `{}`", pattern);
 
     Ok(files)
 }
+
