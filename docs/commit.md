@@ -21,7 +21,7 @@ authors = ["Your Name <your@email.address>"]
 ```
 
 As always,
-add quicli as well as structopt as dependencies:
+add quicli (as well as structopt and serde) as dependencies:
 
 ```toml,file=Cargo.toml
 quicli = "0.1"
