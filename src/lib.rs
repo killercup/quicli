@@ -18,6 +18,8 @@ extern crate structopt;
 #[macro_use] extern crate log;
 extern crate env_logger;
 
+extern crate rayon;
+
 pub mod fs;
 mod main_macro;
 
@@ -34,6 +36,8 @@ mod reexports {
     #[doc(hidden)] pub use failure::*;
 
     #[doc(hidden)] pub use log::*;
+
+    pub use rayon::prelude::*;
 }
 
 /// Prelude – import all of this
@@ -49,7 +53,7 @@ pub mod prelude {
     /// A handy alias for `Result` that carries a generic error type.
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
-    pub use fs::{read_file, write_to_file};
+    pub use fs::*;
 
     #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;
     #[doc(hidden)] pub use log::Level as LogLevel;
