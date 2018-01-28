@@ -1,4 +1,4 @@
-# Generate a commit message
+# Commit message generator with serde and reqwest
 
 Let's start a new tool that outputs helpful commit messages.
 We can use it in case we can't come up with one ourselves,
