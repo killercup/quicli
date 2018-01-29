@@ -6,6 +6,7 @@ authors = ["Pascal Hertleif <killercup@gmail.com>"]
 readme = "Readme.md"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/killercup/quicli"
+homepage = "https://killercup.github.io/quicli/"
 categories = ["command-line-interface"]
 keywords = ["cli", "prelude"]
 
