@@ -23,7 +23,7 @@ Create a new Rust binary project called "head"
 with `cargo new --bin head`.
 You should end up with a `Cargo.toml` that looks like this:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 [package]
 name = "head"
 version = "0.1.0"
@@ -35,7 +35,7 @@ authors = ["Your Name <your@email.address>"]
 Add _quicli_ as an dependency by adding this line
 to the `Cargo.toml` file:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 quicli = "0.1"
 ```
 
@@ -43,7 +43,7 @@ To be able to use _all_ the features,
 also add these two goodies
 just below the "quicli" line:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 structopt = "0.1"
 serde = "1"
 ```
@@ -54,7 +54,7 @@ Now, it's time to get started with writing some Rust!
 Open up your `src/main.rs`.
 Let's import all the good stuff:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 #[macro_use] extern crate quicli;
 use quicli::prelude::*;
 ```
@@ -66,7 +66,7 @@ That's it. That's all the imports you should need for now!
 Now, quickly write a cool CLI
 (it's also okay to type slowly):
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 // Add cool slogan for your app here, e.g.:
 /// Get first n lines of a file
 #[derive(Debug, StructOpt)]
@@ -95,7 +95,7 @@ The next step is the easiest one yet;
 You just have to implement all the features you want to add!
 For now, let's leave it at this:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 main!(|args: Cli, log_level: verbosity| {
     let data = read_file(&args.file)?;
     info!("Reading first {} lines of {:?}", args.count, args.file);

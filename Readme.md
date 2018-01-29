@@ -13,7 +13,7 @@ Quickly build cool CLI apps in Rust.
 
 ## Getting started
 
-**[Read the Getting Started guide!](docs/Readme.md)**
+**[Read the Getting Started guide!](https://killercup.github.io/quicli/)**
 
 ## Thanks
 
