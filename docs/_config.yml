@@ -12,6 +12,9 @@ sass:
   style: compressed
 
 markdown: CommonMarkGhPages
+commonmark:
+  options: ["SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table"]
 plugins:
 - jekyll-readme-index
 - jekyll-optional-front-matter
