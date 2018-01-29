@@ -29,7 +29,7 @@ authors = ["Your Name <your@email.address>"]
 ```
 
 As always,
-add quicli (as well as structopt) as dependencies:
+add _quicli_ (as well as structopt) as dependencies:
 
 ```toml,file=Cargo.toml
 quicli = "0.1"
@@ -56,7 +56,7 @@ Let's ~~load~~ invite our new friends:
 extern crate image;
 ```
 
-And let's also grab everything from quicli:
+And let's also grab everything from _quicli_:
 
 ```rust,file=src/main.rs
 use quicli::prelude::*;
@@ -82,7 +82,7 @@ struct Cli {
     verbosity: u64,
 ```
 
-So far so typical for a quicli app.
+So far so typical for a _quicli_ app.
 Just the same as the example from the Getting Started guide.
 
 Now, let's do a bit of thinking, though:
@@ -141,7 +141,7 @@ main!(|args: Cli, log_level: verbosity| {
 
 First, the good news:
 We don't need to care about the file path/name pattern matching stuff.
-quicli contains a `glob` function,
+_quicli_ contains a `glob` function,
 that, given something like `*.jpg`, `images/*.jpg`, or even `foo/**/bar*.gif`,
 gives you a list of all the file paths that match the pattern.
 
@@ -152,15 +152,15 @@ gives you a list of all the file paths that match the pattern.
 And, while we are at it,
 let's also create the output directory
 if it doesn't exist yet
-(another function quicli gives you):
+(another function _quicli_ gives you):
 
 ```rust,file=src/main.rs
     create_dir(&args.thumb_dir)?;
 ```
 
 Great, that was the first step.
-If you're proud of that, 
-this is your chance to yell it form the mountain tops!
+If you're proud of that,
+this is your chance to yell it from the mountain tops!
 
 ```rust,file=src/main.rs
     info!("Saving {} thumbnails into {:?}...", files.len(), args.thumb_dir);
@@ -171,7 +171,7 @@ this is your chance to yell it form the mountain tops!
 ### Image resizing
 
 Okay, on to the actual image file processing bit.
-This is the bit where we use the image crate to scale the files.
+This is where we use the image crate to scale the files.
 
 Let's write a function that takes our image path,
 the settings we got from the CLI arguments,
@@ -179,7 +179,7 @@ and returns a Result
 that is either `Ok` but contains no data
 (it saves the new image file directly and doesn't return its data to us),
 or is `Err` and carries some information about what went wrong.
-quicli contains a type alias for the usual `Result`,
+_quicli_ contains a type alias for the usual `Result`,
 that automatically sets the `Err` variant to _failure_'s [`Error`] type.
 This will save you some typing in the common case.
 
@@ -196,10 +196,10 @@ fn make_thumbnail(
 ```
 
 What a pretty function signature!
-You try to make the signatures of these helper functions as speaking as possible,
+You try to make the signatures of these helper functions as readable as possible,
 as they can often serve as documentation.
 You are of course still free to add a documentation comment
-to document what you intend them to be used for!
+with more information about what you intend them to be used for!
 
 And while image's API documentation is a bit lacking right now,
 the usage of the _image_ crate is quite simple.
@@ -213,7 +213,7 @@ and call [`resize`] on it:
     let thumbnail = img.resize(longest_edge, longest_edge, image::FilterType::Nearest);
 ```
 
-Now, let's create a JPG file in our thumbnails directory:
+Now, let's create the JPG file in our thumbnails directory:
 
 ```rust,file=src/main.rs
     use std::path::PathBuf;
@@ -229,7 +229,7 @@ Now, let's create a JPG file in our thumbnails directory:
     let mut output_file = File::create(thumb_path)?;
 ```
 
-Right now, this creates thumbnails with the same name as the original file.
+Right now, this creates a thumbnail with the same name as the original file.
 This is a good point to add some features to make this more clever/customizable!
 
 And finally, save our thumbnail
@@ -292,7 +292,7 @@ as well as its error message.
 Let's use `.map_err` to capture the error and log something:
 
 ```rust,file=src/main.rs
-            .map_err(|e| error!("failed to resize {:?} ({})", path, e))
+            .map_err(|e| error!("failed to resize {} ({})", path.display(), e))
         });
 ```
 
@@ -301,8 +301,8 @@ Now, the user will see some errors as they occur.
 Maybe even a few at the same time!
 
 Let's also do a "final" message when we are finished,
-showing how much files we were able to thumbify.
-For that, let's count those files we could resize as `1` and errors as `0`,
+showing how many files we were able to thumbify.
+For that, let's count the files we could resize as `1` and errors as `0`,
 and sum them up:
 
 ```rust,file=src/main.rs
