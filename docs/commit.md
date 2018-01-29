@@ -11,7 +11,7 @@ Let's start a new project called "commit-msg-gen":
 
 You'll find a `Cargo.toml` file that contains:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 [package]
 name = "commit-msg-gen"
 version = "0.1.0"
@@ -23,7 +23,7 @@ authors = ["Your Name <your@email.address>"]
 As always,
 add quicli (as well as structopt and serde) as dependencies:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 quicli = "0.1"
 structopt = "0.1"
 serde = "1"
@@ -37,7 +37,7 @@ Let's use [reqwest]:
 [whatthecommit.com]: https://whatthecommit.com/
 [reqwest]: https://docs.rs/reqwest
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 reqwest = "0.8"
 ```
 
@@ -46,7 +46,7 @@ reqwest = "0.8"
 To get this party started,
 import our new friends:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 extern crate reqwest;
 
 #[macro_use] extern crate quicli;
@@ -62,7 +62,7 @@ How about we go one step further and offer to generate _multiple_ commit message
 Sounds great?
 Let's do this!
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 /// Get some cool commit messages!
 #[derive(Debug, StructOpt)]
 struct Cli {
@@ -129,7 +129,7 @@ We can define our own type that describes the JSON structure:
 
 [`Value`]: https://docs.rs/serde_json/1.0.9/serde_json/enum.Value.html
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 #[derive(Deserialize)]
 struct Commit {
     commit_message: String,
@@ -153,7 +153,7 @@ Oh, and because it might take a while for the commits to arrive,
 we also write some log output.
 (Use `-vv` to see it!)
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 main!(|args: Cli, log_level: verbosity| {
     for i in 0..args.amount {
         info!("try {}", i);

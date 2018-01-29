@@ -11,7 +11,7 @@ colors:
 sass:
   style: compressed
 
-markdown: CommonMark
+markdown: CommonMarkGhPages
 plugins:
 - jekyll-readme-index
 - jekyll-optional-front-matter
