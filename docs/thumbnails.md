@@ -19,7 +19,7 @@ Let's start a new project called "thumbify":
 
 You'll find a `Cargo.toml` file that contains:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 [package]
 name = "thumbify"
 version = "0.1.0"
@@ -31,7 +31,7 @@ authors = ["Your Name <your@email.address>"]
 As always,
 add _quicli_ (as well as structopt) as dependencies:
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 quicli = "0.1"
 structopt = "0.1"
 ```
@@ -43,7 +43,7 @@ It sounds like something that you can do picture-related things with.
 
 [image]: https://docs.rs/image/0.18.0/image/
 
-```toml,file=Cargo.toml
+```toml file=Cargo.toml
 image = "0.18"
 ```
 
@@ -51,14 +51,14 @@ image = "0.18"
 
 Let's ~~load~~ invite our new friends:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 #[macro_use] extern crate quicli;
 extern crate image;
 ```
 
 And let's also grab everything from _quicli_:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 use quicli::prelude::*;
 ```
 
@@ -73,7 +73,7 @@ and it's fine to add more later on.
 Alright!
 Here we go:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 /// Make some thumbnails
 #[derive(Debug, StructOpt)]
 struct Cli {
@@ -95,7 +95,7 @@ But it also sounds more complicated,
 so we'll see how difficult it well be to implement.
 In any case, let's also provide a default value.
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     /// Which files?
     #[structopt(default_value = "*.jpg")]
     pattern: String,
@@ -104,7 +104,7 @@ In any case, let's also provide a default value.
 Next up: How large should these thumbnails be?
 A non-negative integer seems like a good choice.
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     /// How long should the longest edge of the thumbnail be?
     #[structopt(long = "max-size", short = "s", default_value = "300")]
     size: u32,
@@ -114,7 +114,7 @@ Anything else?
 Ah, yes, actually:
 Let's also add an option to specify _where_ to save those thumbnails!
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     /// Where do you want to save the thumbnails?
     #[structopt(long = "output", short = "o", default_value = "thumbnails")]
     thumb_dir: String,
@@ -123,7 +123,7 @@ Let's also add an option to specify _where_ to save those thumbnails!
 There we go.
 Oh, wait, let's not forget to close that struct definition:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 }
 ```
 
@@ -133,7 +133,7 @@ Yeah, now we're done.
 
 Onto implementing features!
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 main!(|args: Cli, log_level: verbosity| {
 ```
 
@@ -145,7 +145,7 @@ _quicli_ contains a `glob` function,
 that, given something like `*.jpg`, `images/*.jpg`, or even `foo/**/bar*.gif`,
 gives you a list of all the file paths that match the pattern.
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     let files = glob(&args.pattern)?;
 ```
 
@@ -154,7 +154,7 @@ let's also create the output directory
 if it doesn't exist yet
 (another function _quicli_ gives you):
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     create_dir(&args.thumb_dir)?;
 ```
 
@@ -162,7 +162,7 @@ Great, that was the first step.
 If you're proud of that,
 this is your chance to yell it from the mountain tops!
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     info!("Saving {} thumbnails into {:?}...", files.len(), args.thumb_dir);
 ```
 
@@ -185,7 +185,7 @@ This will save you some typing in the common case.
 
 [`Error`]: https://docs.rs/failure/0.1.1/failure/struct.Error.html
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
 use std::path::Path;
 
 fn make_thumbnail(
@@ -208,14 +208,14 @@ and call [`resize`] on it:
 
 [`resize`]: https://docs.rs/image/0.18.0/image/imageops/fn.resize.html
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     let img = image::open(&original)?;
     let thumbnail = img.resize(longest_edge, longest_edge, image::FilterType::Nearest);
 ```
 
 Now, let's create the JPG file in our thumbnails directory:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     use std::path::PathBuf;
     use std::fs::File;
 
@@ -234,7 +234,7 @@ This is a good point to add some features to make this more clever/customizable!
 
 And finally, save our thumbnail
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     thumbnail.save(&mut output_file, image::JPEG)?;
 ```
 
@@ -243,7 +243,7 @@ If all went well, we just saved thumbnail file!
 (Otherwise, the `?` will exit the function and return the error.)
 We don't even need to return any data here, so let's just say everything is fine:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     Ok(())
 }
 ```
@@ -270,7 +270,7 @@ we are good to go!
 
 [Rayon]: https://docs.rs/rayon/
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     let thumbnails = files
         .par_iter()
         .map(|path| {
@@ -291,7 +291,7 @@ We know all the arguments that we gave `make_thumbnail`
 as well as its error message.
 Let's use `.map_err` to capture the error and log something:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
             .map_err(|e| error!("failed to resize {} ({})", path.display(), e))
         });
 ```
@@ -305,7 +305,7 @@ showing how many files we were able to thumbify.
 For that, let's count the files we could resize as `1` and errors as `0`,
 and sum them up:
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     let thumbnail_count: i32 = thumbnails
         .map(|x| if x.is_ok() { 1 } else { 0 })
         .sum();
@@ -314,7 +314,7 @@ and sum them up:
 Sweet.
 Now, let's print that number and we are done!
 
-```rust,file=src/main.rs
+```rust file=src/main.rs
     println!(
         "{} of {} files successfully thumbyfied!",
         thumbnail_count,
