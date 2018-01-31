@@ -100,19 +100,66 @@ You can find out about the possible attributes on the Cli struct in
 
 The next step is the easiest one yet;
 You just have to implement all the features you want to add!
-For now, let's leave it at this:
+Just kidding, let's take it one step at a time.
+
+quicli comes with a handy macro called `main!`.
+You can use it as an entry point in your program,
+and instead of the usual `fn main`.
+Its purpose it to reduce the amount boilerplate code you need write.
+Currently, it gives you
+access to the parsed CLI args,
+sets up logging,
+and let's you use [the `?` operator][try-op].
+
+[try-op]: https://doc.rust-lang.org/book/second-edition/ch09-02-recoverable-errors-with-result.html#propagating-errors
+
+The content of `main!` looks like a closure,
+and you can specify up to two parameters (they are both optional):
+
+1. The CLI arguments
+   (i.e., if you write `args: Cli` you get an `args` of the `Cli` type defined above)
+2. The field in your `Cli` struct that defines the log level
+   (just specify the field name and the macro will set up logging automatically)
+
+In the body of this "closure" you can write regular Rust code,
+just like in a `fn main`.
+The only noticable difference is that you can use `?`
+to exit the function on errors
+and print a nice human-readable error message.
+You can find out more about the main macro in [quicli's API documentaton].
+
+[quicli's API documentaton]: https://docs.rs/quicli/0.1.2/quicli/macro.main.html
+
+Alright, are you all set?
+Then let's implement `head`!
 
 ```rust file=src/main.rs
 main!(|args: Cli, log_level: verbosity| {
-    let data = read_file(&args.file)?;
+    let content = read_file(&args.file)?;
+    let content_lines = content.lines();
+    let first_n_lines = content_lines.take(args.count);
+    
     info!("Reading first {} lines of {:?}", args.count, args.file);
-    data.lines().take(args.count).for_each(|line| println!("{}", line));
+
+    for line in first_n_lines {
+        println!("{}", line);
+    }
 });
 ```
 
-You can find out more about the main macro in [quicli's API documentaton].
+Alternatively, you could also write this more concisely
+(by chaining the [Iterator] methods):
 
-[quicli's API documentaton]: https://docs.rs/quicli/0.1.1/quicli/macro.main.html
+[Iterator]: https://doc.rust-lang.org/book/second-edition/ch13-02-iterators.html
+
+```rust
+main!(|args: Cli, log_level: verbosity| {
+    read_file(&args.file)?
+        .lines()
+        .take(args.count)
+        .for_each(|line| println!("{}", line));
+});
+```
 
 ## Give it a spin!
 
