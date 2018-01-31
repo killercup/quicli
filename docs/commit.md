@@ -137,7 +137,7 @@ struct Commit {
 ```
 
 The interesting thing here is the `#[derive(Deserialize)]` annotation.
-It generates an implemtation of a special trait so serde can parse data
+It generates an implementation of a special trait so serde can parse data
 and turn it into `Commit`s.
 In the above definition, we only wrote one of the three fields.
 That's okay, the other fields will be ignored.
