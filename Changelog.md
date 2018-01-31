@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- `main!` now uses the more permissive `std::result::Result` enum and `std::error::Error` trait.
+
 ## [0.1.2] - 2018-01-28
 
 ### Added
