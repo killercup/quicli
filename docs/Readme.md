@@ -17,6 +17,13 @@ How about this:
 We are going to create a small CLI tool
 that outputs the first `n` lines of a given file.
 
+_Note:_
+While we hope quicli is great tool to get started with Rust
+this documentation is not an introduction to the language.
+We recommend you to read [the book] first.
+
+[the book]: https://doc.rust-lang.org/book/
+
 ## Create a Cargo project
 
 Create a new Rust binary project called "head"
