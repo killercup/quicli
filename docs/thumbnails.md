@@ -92,7 +92,7 @@ Or maybe a _pattern_ that matches only some of their files?
 
 That 'pattern' idea does sounds more powerful, let's go with that.
 But it also sounds more complicated,
-so we'll see how difficult it well be to implement.
+so we'll see how difficult it will be to implement.
 In any case, let's also provide a default value.
 
 ```rust file=src/main.rs
@@ -248,9 +248,9 @@ We don't even need to return any data here, so let's just say everything is fine
 }
 ```
 
-### Concurency
+### Concurrency
 
-It's safe to asume that
+It's safe to assume that
 we are doing some iterating over this `files` list.
 Something like this probably:
 
