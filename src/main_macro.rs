@@ -32,7 +32,7 @@
 macro_rules! main {
     (|$args:ident: $cli:ty, log_level: $verbosity:ident| $body:expr) => {
         fn main() {
-            fn run() -> $crate::prelude::Result<()> {
+            fn run() -> std::result::Result<(), Box<std::error::Error>> {
                 let $args = <$cli>::from_args();
                 let log_level = match $args.verbosity {
                     0 => $crate::prelude::LogLevel::Error,
@@ -64,7 +64,7 @@ macro_rules! main {
 
     (|$args:ident: $cli:ty| $body:expr) => {
         fn main() {
-            fn run() -> $crate::prelude::Result<()> {
+            fn run() -> std::result::Result<(), Box<std::error::Error>> {
                 let $args = <$cli>::from_args();
                 $crate::prelude::LoggerBuiler::new()
                     .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
@@ -90,7 +90,7 @@ macro_rules! main {
 
     ($body:expr) => {
         fn main() {
-            fn run() -> $crate::prelude::Result<()> {
+            fn run() -> std::result::Result<(), Box<std::error::Error>> {
                 $crate::prelude::LoggerBuiler::new()
                     .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
