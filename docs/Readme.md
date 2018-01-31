@@ -104,9 +104,12 @@ For now, let's leave it at this:
 
 ```rust file=src/main.rs
 main!(|args: Cli, log_level: verbosity| {
-    let data = read_file(&args.file)?;
     info!("Reading first {} lines of {:?}", args.count, args.file);
-    data.lines().take(args.count).for_each(|line| println!("{}", line));
+
+    read_file(&args.file)?
+        .lines()
+        .take(args.count)
+        .for_each(|line| println!("{}", line));
 });
 ```
 
