@@ -126,7 +126,7 @@ just like in a `fn main`.
 The only noticable difference is that you can use `?`
 to exit the function on errors
 and print a nice human-readable error message.
-You can find out more about the main macro in [quicli's API documentaton].
+You can find out more about the main macro in [quicli's API documentation].
 
 [quicli's API documentaton]: https://docs.rs/quicli/0.1.2/quicli/macro.main.html
 
