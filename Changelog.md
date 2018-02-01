@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.3] - 2018-02-01
+
 ### Changed
 
 - `main!` now uses the more permissive `std::result::Result` enum and `std::error::Error` trait.
+- Fixed a bunch of typos in the docs (thanks everyone!)
+- Extended the Getting Started guide
 
 ## [0.1.2] - 2018-01-28
 
@@ -48,7 +52,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Commit Message generator example
 - read/write file functions
 
-[Unreleased]: https://github.com/killercup/quicli/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/killercup/quicli/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/killercup/quicli/compare/v0.1.0...v0.1.3
 [0.1.2]: https://github.com/killercup/quicli/compare/v0.1.0...v0.1.2
 [0.1.1]: https://github.com/killercup/quicli/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/killercup/quicli/compare/cb747195866d2a240ab8154d00facfead3e55a9e...v0.1.0
