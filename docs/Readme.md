@@ -105,7 +105,7 @@ Just kidding, let's take it one step at a time.
 quicli comes with a handy macro called `main!`.
 You can use it as an entry point in your program,
 and instead of the usual `fn main`.
-Its purpose it to reduce the amount boilerplate code you need write.
+Its purpose it to reduce the amount boilerplate code you need to write.
 Currently, it gives you
 access to the parsed CLI args,
 sets up logging,
