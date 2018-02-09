@@ -25,7 +25,7 @@ add quicli (as well as structopt and serde) as dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.1"
-structopt = "0.1"
+structopt = { git = "https://github.com/TeXitoi/structopt" }
 serde = "1"
 ```
 
@@ -49,6 +49,7 @@ import our new friends:
 ```rust file=src/main.rs
 extern crate reqwest;
 
+#[macro_use] extern crate structopt;
 #[macro_use] extern crate quicli;
 use quicli::prelude::*;
 ```

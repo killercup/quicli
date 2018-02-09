@@ -51,7 +51,7 @@ also add these two goodies
 just below the "quicli" line:
 
 ```toml file=Cargo.toml
-structopt = "0.1"
+structopt = { git = "https://github.com/TeXitoi/structopt" }
 serde = "1"
 ```
 
@@ -62,6 +62,7 @@ Open up your `src/main.rs`.
 Let's import all the good stuff:
 
 ```rust file=src/main.rs
+#[macro_use] extern crate structopt;
 #[macro_use] extern crate quicli;
 use quicli::prelude::*;
 ```
