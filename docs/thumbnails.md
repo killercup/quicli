@@ -33,7 +33,7 @@ add _quicli_ (as well as structopt) as dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.1"
-structopt = "0.1"
+structopt = { git = "https://github.com/TeXitoi/structopt" }
 ```
 
 Since we need to resize images,
@@ -52,6 +52,7 @@ image = "0.18"
 Let's ~~load~~ invite our new friends:
 
 ```rust file=src/main.rs
+#[macro_use] extern crate structopt;
 #[macro_use] extern crate quicli;
 extern crate image;
 ```

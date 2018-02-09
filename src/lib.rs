@@ -9,7 +9,6 @@
 #[macro_use] extern crate serde_derive;
 extern crate serde;
 
-#[macro_use] extern crate structopt_derive;
 extern crate structopt;
 
 #[macro_use] extern crate failure_derive;
@@ -26,10 +25,6 @@ mod main_macro;
 mod reexports {
     #[doc(hidden)] pub use serde_derive::*;
 
-    #[doc(hidden)] pub use structopt_derive::*;
-    #[doc(hidden)] pub mod structopt {
-        pub use ::structopt::*;
-    }
     #[doc(hidden)] pub use structopt::StructOpt;
 
     #[doc(hidden)] pub use failure_derive::*;
