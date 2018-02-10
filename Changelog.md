@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [#45]: https://github.com/killercup/quicli/pull/45
 
+### Changed
+
+- Upgrade structopt to 0.2:
+  - No need to add structopt to you dependencies anymore (just delete the line in the `Cargo.toml`)
+  - Their handling of "occurrences of" parameters changed, so, for verbosity you now need to write:
+    
+    ```rust
+    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
+    verbosity: u64,
+    ```
+
 ## [0.1.4] - 2018-02-09
 
 ### Changed
