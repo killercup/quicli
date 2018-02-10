@@ -78,7 +78,7 @@ struct Cli {
     file: String,
     /// Pass many times for more log output
     #[structopt(long = "verbose", short = "v", parse(from_occurrences))]
-    verbosity: u64,
+    verbosity: u8,
 }
 ```
 

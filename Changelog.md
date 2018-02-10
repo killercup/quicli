@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     
     ```rust
     #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
-    verbosity: u64,
+    verbosity: u8,
     ```
 
 ## [0.1.4] - 2018-02-09

@@ -6,7 +6,7 @@ use quicli::prelude::*;
 #[derive(Debug, StructOpt)]
 struct Cli {
     #[structopt(long = "verbose", short = "v", parse(from_occurrences))]
-    team_rockets_blasting_off_again: u64
+    team_rockets_blasting_off_again: u8,
 }
 
 main!(|cli_args: Cli, log_level: team_rockets_blasting_off_again| {

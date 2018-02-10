@@ -78,7 +78,7 @@ struct Cli {
     amount: i32,
     /// Pass many times for more log output
     #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
-    verbosity: u64,
+    verbosity: u8,
 }
 ```
 
