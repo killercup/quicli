@@ -8,22 +8,22 @@
 
 #[cfg(feature="full-throttle")]
 #[macro_use]
-pub extern crate serde_derive;
+extern crate serde_derive;
 #[cfg(feature="full-throttle")]
-pub extern crate serde;
+extern crate serde;
 
 #[macro_use]
-pub extern crate structopt_derive;
-pub extern crate structopt;
+extern crate structopt_derive;
+extern crate structopt;
 
 #[macro_use] extern crate failure_derive;
 #[macro_use] extern crate failure;
 
-#[macro_use] pub extern crate log;
-pub extern crate env_logger;
+#[macro_use] extern crate log;
+extern crate env_logger;
 
 #[cfg(feature="full-throttle")]
-pub extern crate rayon;
+extern crate rayon;
 
 #[cfg(feature="full-throttle")]
 pub mod fs;
@@ -36,7 +36,10 @@ mod reexports {
     #[doc(hidden)] pub use serde_derive::*;
 
     #[doc(hidden)] pub use structopt_derive::*;
-    #[doc(hidden)] pub use structopt::{self, StructOpt};
+    #[doc(hidden)] pub mod structopt {
+        pub use ::structopt::*;
+    }
+    #[doc(hidden)] pub use structopt::StructOpt;
 
     #[doc(hidden)] pub use failure_derive::*;
     #[doc(hidden)] pub use failure::*;
