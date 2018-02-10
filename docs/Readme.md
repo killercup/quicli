@@ -77,7 +77,7 @@ struct Cli {
     /// The file to read
     file: String,
     /// Pass many times for more log output
-    #[structopt(long = "verbose", short = "v")]
+    #[structopt(long = "verbose", short = "v", parse(from_occurrences))]
     verbosity: u64,
 }
 ```

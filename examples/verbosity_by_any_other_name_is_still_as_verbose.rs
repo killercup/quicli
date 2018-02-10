@@ -5,7 +5,7 @@ use quicli::prelude::*;
 /// Verbosity by any other name is still as verbose
 #[derive(Debug, StructOpt)]
 struct Cli {
-    #[structopt(long = "verbose", short = "v")]
+    #[structopt(long = "verbose", short = "v", parse(from_occurrences))]
     team_rockets_blasting_off_again: u64
 }
 

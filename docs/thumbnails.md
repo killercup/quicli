@@ -76,7 +76,7 @@ Here we go:
 #[derive(Debug, StructOpt)]
 struct Cli {
     /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v")]
+    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
     verbosity: u64,
 ```
 
