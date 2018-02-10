@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- The verbosity flag of the `main!` macro now actually works! ([#45])
+
+[#45]: https://github.com/killercup/quicli/pull/45
+
 ## [0.1.4] - 2018-02-09
 
 ### Changed
