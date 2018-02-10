@@ -34,7 +34,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                let log_level = match $args.verbosity {
+                let log_level = match $args.$verbosity {
                     0 => $crate::prelude::LogLevel::Error,
                     1 => $crate::prelude::LogLevel::Warn,
                     2 => $crate::prelude::LogLevel::Info,
