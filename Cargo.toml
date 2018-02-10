@@ -13,11 +13,32 @@ keywords = ["cli", "prelude"]
 [dependencies]
 failure = "0.1.1"
 failure_derive = "0.1.1"
-serde = "1.0.27"
-serde_derive = "1.0.27"
 structopt = "0.1.6"
 structopt-derive = "0.1.6"
 log = "0.4.1"
 env_logger = "0.5.3"
-glob = "0.2.11"
-rayon = "0.9.0"
+
+[dependencies.serde]
+version = "1.0.27"
+optional = true
+
+[dependencies.serde_derive]
+version = "1.0.27"
+optional = true
+
+[dependencies.glob]
+version = "0.2.11"
+optional = true
+
+[dependencies.rayon]
+version = "0.9.0"
+optional = true
+
+[features]
+default = ["full-throttle"]
+full-throttle = [
+    "serde",
+    "serde_derive",
+    "glob",
+    "rayon",
+]

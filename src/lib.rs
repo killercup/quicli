@@ -6,38 +6,47 @@
 #![allow(unused_imports)]
 #![deny(missing_docs)]
 
-#[macro_use] extern crate serde_derive;
-extern crate serde;
+#[cfg(feature="full-throttle")]
+#[macro_use]
+pub extern crate serde_derive;
+#[cfg(feature="full-throttle")]
+pub extern crate serde;
 
-#[macro_use] extern crate structopt_derive;
-extern crate structopt;
+#[macro_use]
+pub extern crate structopt_derive;
+pub extern crate structopt;
 
 #[macro_use] extern crate failure_derive;
 #[macro_use] extern crate failure;
 
-#[macro_use] extern crate log;
-extern crate env_logger;
+#[macro_use] pub extern crate log;
+pub extern crate env_logger;
 
-extern crate rayon;
+#[cfg(feature="full-throttle")]
+pub extern crate rayon;
 
+#[cfg(feature="full-throttle")]
 pub mod fs;
 mod main_macro;
+mod easy_log;
+pub use easy_log::set_log_verbosity;
 
 mod reexports {
+    #[cfg(feature="full-throttle")]
     #[doc(hidden)] pub use serde_derive::*;
 
     #[doc(hidden)] pub use structopt_derive::*;
-    #[doc(hidden)] pub mod structopt {
-        pub use ::structopt::*;
-    }
-    #[doc(hidden)] pub use structopt::StructOpt;
+    #[doc(hidden)] pub use structopt::{self, StructOpt};
 
     #[doc(hidden)] pub use failure_derive::*;
     #[doc(hidden)] pub use failure::*;
 
     #[doc(hidden)] pub use log::*;
 
+    #[cfg(feature="full-throttle")]
     pub use rayon::prelude::*;
+
+   pub use super::set_log_verbosity;
 }
 
 /// Prelude – import all of this
@@ -53,6 +62,7 @@ pub mod prelude {
     /// A handy alias for `Result` that carries a generic error type.
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
+    #[cfg(feature="full-throttle")]
     pub use fs::*;
 
     #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;
