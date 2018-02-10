@@ -46,15 +46,6 @@ to the `Cargo.toml` file:
 quicli = "0.1"
 ```
 
-To be able to use _all_ the features,
-also add these two goodies
-just below the "quicli" line:
-
-```toml file=Cargo.toml
-structopt = "0.1"
-serde = "1"
-```
-
 ## Import quicli
 
 Now, it's time to get started with writing some Rust!

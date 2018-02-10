@@ -28,12 +28,10 @@ authors = ["Your Name <your@email.address>"]
 [dependencies]
 ```
 
-As always,
-add _quicli_ (as well as structopt) as dependencies:
+As always, add _quicli_ to your dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.1"
-structopt = "0.1"
 ```
 
 Since we need to resize images,
