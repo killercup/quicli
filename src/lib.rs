@@ -6,10 +6,14 @@
 #![allow(unused_imports)]
 #![deny(missing_docs)]
 
-#[macro_use] extern crate serde_derive;
+#[cfg(feature="full-throttle")]
+#[macro_use]
+extern crate serde_derive;
+#[cfg(feature="full-throttle")]
 extern crate serde;
 
-#[macro_use] extern crate structopt_derive;
+#[macro_use]
+extern crate structopt_derive;
 extern crate structopt;
 
 #[macro_use] extern crate failure_derive;
@@ -18,12 +22,17 @@ extern crate structopt;
 #[macro_use] extern crate log;
 extern crate env_logger;
 
+#[cfg(feature="full-throttle")]
 extern crate rayon;
 
+#[cfg(feature="full-throttle")]
 pub mod fs;
 mod main_macro;
+mod easy_log;
+pub use easy_log::set_log_verbosity;
 
 mod reexports {
+    #[cfg(feature="full-throttle")]
     #[doc(hidden)] pub use serde_derive::*;
 
     #[doc(hidden)] pub use structopt_derive::*;
@@ -37,7 +46,10 @@ mod reexports {
 
     #[doc(hidden)] pub use log::*;
 
+    #[cfg(feature="full-throttle")]
     pub use rayon::prelude::*;
+
+   pub use super::set_log_verbosity;
 }
 
 /// Prelude – import all of this
@@ -53,6 +65,7 @@ pub mod prelude {
     /// A handy alias for `Result` that carries a generic error type.
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
+    #[cfg(feature="full-throttle")]
     pub use fs::*;
 
     #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;

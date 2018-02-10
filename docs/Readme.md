@@ -65,7 +65,7 @@ Let's import all the good stuff:
 #[macro_use] extern crate quicli;
 use quicli::prelude::*;
 ```
- 
+
 That's it. That's all the imports you should need for now!
 
 ## Write a CLI struct
@@ -138,7 +138,7 @@ main!(|args: Cli, log_level: verbosity| {
     let content = read_file(&args.file)?;
     let content_lines = content.lines();
     let first_n_lines = content_lines.take(args.count);
-    
+
     info!("Reading first {} lines of {:?}", args.count, args.file);
 
     for line in first_n_lines {

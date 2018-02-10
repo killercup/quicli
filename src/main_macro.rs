@@ -34,18 +34,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                let log_level = match $args.$verbosity {
-                    0 => $crate::prelude::LogLevel::Error,
-                    1 => $crate::prelude::LogLevel::Warn,
-                    2 => $crate::prelude::LogLevel::Info,
-                    3 => $crate::prelude::LogLevel::Debug,
-                    _ => $crate::prelude::LogLevel::Trace,
-                }.to_level_filter();
-
-                $crate::prelude::LoggerBuiler::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), log_level)
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                $crate::prelude::set_log_verbosity($args.$verbosity)?;
 
                 $body
 
@@ -66,10 +55,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                $crate::prelude::LoggerBuiler::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                $crate::prelude::set_log_verbosity(0)?; // ERROR level verbosity
 
                 $body
 
@@ -91,10 +77,7 @@ macro_rules! main {
     ($body:expr) => {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
-                $crate::prelude::LoggerBuiler::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                $crate::prelude::set_log_verbosity(0)?; // ERROR level verbosity
 
                 $body
                 Ok(())
