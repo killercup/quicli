@@ -47,11 +47,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Re-export Rayon traits
 - Export `Result` type alias using failure's Error
 
-## Removed
+### Removed
 
 - All the examples are now guides
 
-## Changed
+### Changed
 
 - `main!` now sets up logging in all cases
 - Use buffered reading/writing in fs functions
