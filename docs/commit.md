@@ -20,13 +20,10 @@ authors = ["Your Name <your@email.address>"]
 [dependencies]
 ```
 
-As always,
-add quicli (as well as structopt and serde) as dependencies:
+Add quicli to your dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.1"
-structopt = "0.1"
-serde = "1"
 ```
 
 We'll get out commit messages from the glorious website
@@ -39,6 +36,16 @@ Let's use [reqwest]:
 
 ```toml file=Cargo.toml
 reqwest = "0.8"
+```
+
+The response will be in JSON,
+so let's add [serde]
+that allows us to easily deal with serialized data:
+
+[serde]: https://serde.rs/
+
+```toml file=Cargo.toml
+serde = "1"
 ```
 
 ## Import quicli and reqwest
@@ -70,8 +77,8 @@ struct Cli {
     #[structopt(long = "amount", default_value = "3")]
     amount: i32,
     /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v")]
-    verbosity: u64,
+    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
+    verbosity: u8,
 }
 ```
 

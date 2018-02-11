@@ -15,7 +15,8 @@
 /// - `main!(|args: Cli, log_level: verbosity| { ... })`: The log level will
 ///   depend on the integer value of the `verbosity` field of `args` (error = 0,
 ///   warn = 1, info = 2, debug = 3, trace = ≥4). The field's type should be
-///   `u64`, so structopt will automatically give you its number of occurances.
+///   set to `parse(from_occurrences)` in the `#[structopt(…)]` attribute,
+///   so structopt will automatically give you its number of occurances..
 ///
 /// # Examples
 ///

@@ -28,12 +28,10 @@ authors = ["Your Name <your@email.address>"]
 [dependencies]
 ```
 
-As always,
-add _quicli_ (as well as structopt) as dependencies:
+As always, add _quicli_ to your dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.1"
-structopt = "0.1"
 ```
 
 Since we need to resize images,
@@ -78,8 +76,8 @@ Here we go:
 #[derive(Debug, StructOpt)]
 struct Cli {
     /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v")]
-    verbosity: u64,
+    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
+    verbosity: u8,
 ```
 
 So far so typical for a _quicli_ app.
