@@ -85,7 +85,7 @@ struct Cli {
 You can find out about the possible attributes on the Cli struct in
 [structopt's documentation].
 
-[structopt's documentation]: https://docs.rs/structopt-derive/0.1.6/structopt_derive/
+[structopt's documentation]: https://docs.rs/structopt/0.2.0/structopt/
 
 ## Implement all the features
 
@@ -119,7 +119,7 @@ to exit the function on errors
 and print a nice human-readable error message.
 You can find out more about the main macro in [quicli's API documentation].
 
-[quicli's API documentaton]: https://docs.rs/quicli/0.1.2/quicli/macro.main.html
+[quicli's API documentaton]: https://docs.rs/quicli/0.2.0/quicli/macro.main.html
 
 Alright, are you all set?
 Then let's implement `head`!

@@ -32,7 +32,7 @@ so we'll need a crate that let's us do HTTP ws.
 Let's use [reqwest]:
 
 [whatthecommit.com]: https://whatthecommit.com/
-[reqwest]: https://docs.rs/reqwest
+[reqwest]: https://docs.rs/reqwest/0.8.4/reqwest/
 
 ```toml file=Cargo.toml
 reqwest = "0.8"
