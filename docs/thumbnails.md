@@ -31,7 +31,7 @@ authors = ["Your Name <your@email.address>"]
 As always, add _quicli_ to your dependencies:
 
 ```toml file=Cargo.toml
-quicli = "0.1"
+quicli = "0.2"
 ```
 
 Since we need to resize images,
