@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-02-11
+
 ### Fixed
 
 - The verbosity flag of the `main!` macro now actually works! ([#45])
@@ -47,11 +49,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Re-export Rayon traits
 - Export `Result` type alias using failure's Error
 
-## Removed
+### Removed
 
 - All the examples are now guides
 
-## Changed
+### Changed
 
 - `main!` now sets up logging in all cases
 - Use buffered reading/writing in fs functions
@@ -75,7 +77,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Commit Message generator example
 - read/write file functions
 
-[Unreleased]: https://github.com/killercup/quicli/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/killercup/quicli/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/killercup/quicli/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/killercup/quicli/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/killercup/quicli/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/killercup/quicli/compare/v0.1.1...v0.1.2
