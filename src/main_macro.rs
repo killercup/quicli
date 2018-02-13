@@ -34,7 +34,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                $crate::prelude::set_log_verbosity($args.$verbosity)?;
+                $crate::easy_log::set_log_verbosity($args.$verbosity)?;
 
                 $body
 
@@ -55,7 +55,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                $crate::prelude::set_log_verbosity(0)?; // ERROR level verbosity
+                $crate::easy_log::set_log_verbosity(0)?; // ERROR level verbosity
 
                 $body
 
@@ -77,7 +77,7 @@ macro_rules! main {
     ($body:expr) => {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
-                $crate::prelude::set_log_verbosity(0)?; // ERROR level verbosity
+                $crate::easy_log::set_log_verbosity(0)?; // ERROR level verbosity
 
                 $body
                 Ok(())

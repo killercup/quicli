@@ -8,9 +8,11 @@ use super::prelude;
 /// - `3`: debug
 /// - `>=4`: trace
 ///
-/// This is used in the [`main!`] macro. You should typically use that instead.
+/// This is used in the [`main!`] macro. This function is _not_ stabilized and should
+/// not (yet) be used directly. See
 ///
 /// [`main!`]: macro.main.html
+#[doc(hidden)]
 pub fn set_log_verbosity(verbosity: u64) -> prelude::Result<()> {
     let log_level = match verbosity {
         0 => prelude::LogLevel::Error,

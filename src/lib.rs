@@ -28,7 +28,8 @@ extern crate rayon;
 #[cfg(feature="full-throttle")]
 pub mod fs;
 mod main_macro;
-mod easy_log;
+#[doc(hidden)]
+pub mod easy_log;
 pub use easy_log::set_log_verbosity;
 
 mod reexports {
