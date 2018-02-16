@@ -62,11 +62,67 @@ macro_rules! main {
             }
         }
     };
+    
+    (|mut $args:ident: $cli:ty, log_level: $verbosity:ident| $body:expr) => {
+        fn main() {
+            fn run() -> $crate::prelude::Result<()> {
+                let mut $args = <$cli>::from_args();
+                let log_level = match $args.$verbosity {
+                    0 => $crate::prelude::LogLevel::Error,
+                    1 => $crate::prelude::LogLevel::Warn,
+                    2 => $crate::prelude::LogLevel::Info,
+                    3 => $crate::prelude::LogLevel::Debug,
+                    _ => $crate::prelude::LogLevel::Trace,
+                }.to_level_filter();
+
+                $crate::prelude::LoggerBuiler::new()
+                    .filter(Some(env!("CARGO_PKG_NAME")), log_level)
+                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                    .try_init()?;
+
+                $body
+
+                Ok(())
+            }
+
+            match run() {
+                Ok(_) => {}
+                Err(e) => {
+                    eprintln!("{}", e);
+                    ::std::process::exit(1);
+                }
+            }
+        }
+    };
 
     (|$args:ident: $cli:ty| $body:expr) => {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
+                $crate::prelude::LoggerBuiler::new()
+                    .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
+                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                    .try_init()?;
+
+                $body
+
+                Ok(())
+            }
+
+            match run() {
+                Ok(_) => {}
+                Err(e) => {
+                    eprintln!("{}", e);
+                    ::std::process::exit(1);
+                }
+            }
+        }
+    };
+
+    (|mut $args:ident: $cli:ty| $body:expr) => {
+        fn main() {
+            fn run() -> $crate::prelude::Result<()> {
+                let mut $args = <$cli>::from_args();
                 $crate::prelude::LoggerBuiler::new()
                     .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
