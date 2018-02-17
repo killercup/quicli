@@ -55,6 +55,6 @@ pub mod prelude {
 
     pub use fs::*;
 
-    #[doc(hidden)] pub use env_logger::Builder as LoggerBuiler;
+    #[doc(hidden)] pub use env_logger::Builder as LoggerBuilder;
     #[doc(hidden)] pub use log::Level as LogLevel;
 }

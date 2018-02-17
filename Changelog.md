@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- `prelude::LoggerBuiler` has been renamed to `prelude::LoggerBuilder`
+
 ## [0.2.0] - 2018-02-11
 
 ### Fixed
