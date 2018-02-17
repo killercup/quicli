@@ -43,7 +43,7 @@ macro_rules! main {
                     _ => $crate::prelude::LogLevel::Trace,
                 }.to_level_filter();
 
-                $crate::prelude::LoggerBuiler::new()
+                $crate::prelude::LoggerBuilder::new()
                     .filter(Some(env!("CARGO_PKG_NAME")), log_level)
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
                     .try_init()?;
