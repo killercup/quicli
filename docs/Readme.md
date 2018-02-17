@@ -119,7 +119,7 @@ to exit the function on errors
 and print a nice human-readable error message.
 You can find out more about the main macro in [quicli's API documentation].
 
-[quicli's API documentaton]: https://docs.rs/quicli/0.2.0/quicli/macro.main.html
+[quicli's API documentation]: https://docs.rs/quicli/0.2.0/quicli/macro.main.html
 
 Alright, are you all set?
 Then let's implement `head`!
