@@ -23,6 +23,9 @@ glob = "0.2.11"
 rayon = "0.9.0"
 
 [workspace]
+members = [
+    "examples/verbosity",
+]
 
 [patch.crates-io]
 quicli = { path = '.' }
