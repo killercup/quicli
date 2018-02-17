@@ -24,6 +24,9 @@ rayon = "0.9.0"
 
 [workspace]
 members = [
+    "examples/commit",
+    "examples/Readme",
+    "examples/thumbnails",
     "examples/verbosity",
 ]
 

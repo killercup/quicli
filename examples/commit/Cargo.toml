@@ -1,0 +1,9 @@
+[package]
+name = "commit-msg-gen"
+version = "0.1.0"
+authors = ["Your Name <your@email.address>"]
+
+[dependencies]
+quicli = "0.2"
+reqwest = "0.8"
+serde = "1"

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- The full code of the example projects from the guides is now also available in
+  the repository's [`examples/`] directory.
+  
+[`examples/`]: https://github.com/killercup/quicli/tree/master/examples
+
 ### Changed
 
 - `prelude::LoggerBuiler` has been renamed to `prelude::LoggerBuilder`
