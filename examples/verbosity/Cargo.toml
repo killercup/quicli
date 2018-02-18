@@ -5,3 +5,6 @@ authors = ["Christopher Durham <cad97@cad97.com>"]
 
 [dependencies]
 quicli = "0.2"
+
+[dev-dependencies]
+assert_cli = "0.5.4"
