@@ -6,37 +6,55 @@
 #![allow(unused_imports)]
 #![deny(missing_docs)]
 
-#[macro_use] extern crate serde_derive;
+#[cfg(feature = "full-throttle")]
+#[macro_use]
+extern crate serde_derive;
+#[cfg(feature = "full-throttle")]
 extern crate serde;
 
-#[macro_use] extern crate structopt_derive;
+#[macro_use]
+extern crate structopt_derive;
 extern crate structopt;
 
-#[macro_use] extern crate failure_derive;
-#[macro_use] extern crate failure;
+#[macro_use]
+extern crate failure_derive;
+#[macro_use]
+extern crate failure;
 
-#[macro_use] extern crate log;
+#[macro_use]
+extern crate log;
 extern crate env_logger;
 
+#[cfg(feature = "full-throttle")]
 extern crate rayon;
 
+#[cfg(feature = "full-throttle")]
 pub mod fs;
 mod main_macro;
 
 mod reexports {
-    #[doc(hidden)] pub use serde_derive::*;
+    #[cfg(feature = "full-throttle")]
+    #[doc(hidden)]
+    pub use serde_derive::*;
 
-    #[doc(hidden)] pub use structopt_derive::*;
-    #[doc(hidden)] pub mod structopt {
-        pub use ::structopt::*;
+    #[doc(hidden)]
+    pub use structopt_derive::*;
+    #[doc(hidden)]
+    pub mod structopt {
+        pub use structopt::*;
     }
-    #[doc(hidden)] pub use structopt::StructOpt;
+    #[doc(hidden)]
+    pub use structopt::StructOpt;
 
-    #[doc(hidden)] pub use failure_derive::*;
-    #[doc(hidden)] pub use failure::*;
+    #[doc(hidden)]
+    pub use failure_derive::*;
+    #[doc(hidden)]
+    pub use failure::*;
 
-    #[doc(hidden)] pub use log::*;
+    #[doc(hidden)]
+    pub use log::*;
 
+    #[cfg(feature = "full-throttle")]
     pub use rayon::prelude::*;
 }
 
@@ -53,8 +71,11 @@ pub mod prelude {
     /// A handy alias for `Result` that carries a generic error type.
     pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
 
+    #[cfg(feature = "full-throttle")]
     pub use fs::*;
 
-    #[doc(hidden)] pub use env_logger::Builder as LoggerBuilder;
-    #[doc(hidden)] pub use log::Level as LogLevel;
+    #[doc(hidden)]
+    pub use env_logger::Builder as LoggerBuilder;
+    #[doc(hidden)]
+    pub use log::Level as LogLevel;
 }
