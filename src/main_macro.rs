@@ -44,7 +44,7 @@ macro_rules! main {
                 }.to_level_filter();
 
                 $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), log_level)
+                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), log_level)
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
                     .try_init()?;
 
@@ -68,7 +68,7 @@ macro_rules! main {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
                 $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
+                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
                     .try_init()?;
 
@@ -93,7 +93,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(env!("CARGO_PKG_NAME")), $crate::prelude::LogLevel::Error.to_level_filter())
+                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
                     .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
                     .try_init()?;
 
