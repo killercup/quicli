@@ -1,6 +1,6 @@
 //! Some tools to get you started with writing small CLIs in Rust.
 //!
-//! You can find some examples and moer information on how to use this crate
+//! You can find some examples and more information on how to use this crate
 //! in the [README](https://github.com/killercup/quicli).
 
 #![allow(unused_imports)]

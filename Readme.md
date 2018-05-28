@@ -25,7 +25,7 @@ This is only possible because of all the awesome libraries included here:
 - [failure] for ergonomic error handling.
 - …and more to come!
 
-[Structopt]: https://docs.rs/structopt-derive
+[Structopt]: https://docs.rs/structopt
 [Clap]: https://clap.rs/
 [Serde]: https://serde.rs/
 [failure]: https://boats.gitlab.io/failure/
