@@ -53,12 +53,12 @@ macro_rules! main {
                 Ok(())
             }
 
-            match run() {
-                Ok(_) => {}
-                Err(e) => {
-                    eprintln!("{}", e);
-                    ::std::process::exit(1);
+            if let Err(e) = run() {
+                eprintln!("error: {}", e);
+                for cause in e.causes().skip(1) {
+                    eprintln!("caused by: {}", cause);
                 }
+                ::std::process::exit(1);
             }
         }
     };
@@ -77,12 +77,12 @@ macro_rules! main {
                 Ok(())
             }
 
-            match run() {
-                Ok(_) => {}
-                Err(e) => {
-                    eprintln!("{}", e);
-                    ::std::process::exit(1);
+            if let Err(e) = run() {
+                eprintln!("error: {}", e);
+                for cause in e.causes().skip(1) {
+                    eprintln!("caused by: {}", cause);
                 }
+                ::std::process::exit(1);
             }
         }
     };
@@ -101,12 +101,12 @@ macro_rules! main {
                 Ok(())
             }
 
-            match run() {
-                Ok(_) => {}
-                Err(e) => {
-                    eprintln!("{}", e);
-                    ::std::process::exit(1);
+            if let Err(e) = run() {
+                eprintln!("error: {}", e);
+                for cause in e.causes().skip(1) {
+                    eprintln!("caused by: {}", cause);
                 }
+                ::std::process::exit(1);
             }
         }
     };
