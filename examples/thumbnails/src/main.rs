@@ -4,9 +4,8 @@ use quicli::prelude::*;
 /// Make some thumbnails
 #[derive(Debug, StructOpt)]
 struct Cli {
-    /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
-    verbosity: u8,
+    #[structopt(flatten)]
+    verbosity: Verbosity,
     /// Which files?
     #[structopt(default_value = "*.jpg")]
     pattern: String,

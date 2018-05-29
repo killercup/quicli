@@ -75,9 +75,8 @@ Here we go:
 /// Make some thumbnails
 #[derive(Debug, StructOpt)]
 struct Cli {
-    /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
-    verbosity: u8,
+    #[structopt(flatten)]
+    verbosity: Verbosity,
 ```
 
 So far so typical for a _quicli_ app.

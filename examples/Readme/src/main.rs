@@ -11,9 +11,9 @@ struct Cli {
     // Add a positional argument that the user has to supply:
     /// The file to read
     file: String,
-    /// Pass many times for more log output
-    #[structopt(long = "verbose", short = "v", parse(from_occurrences))]
-    verbosity: u8,
+    // Quick and easy logging setup you get for free with quicli
+    #[structopt(flatten)]
+    verbosity: Verbosity,
 }
 main!(|args: Cli, log_level: verbosity| {
     let content = read_file(&args.file)?;
