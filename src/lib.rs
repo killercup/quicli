@@ -60,6 +60,11 @@ mod reexports {
 
     #[cfg(feature = "full-throttle")]
     pub use rayon::prelude::*;
+
+    #[doc(hidden)]
+    pub use env_logger::Builder as LoggerBuilder;
+    #[doc(hidden)]
+    pub use log::Level as LogLevel;
 }
 
 /// Prelude – import all of this
