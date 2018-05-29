@@ -35,18 +35,7 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                let log_level = match $args.$verbosity {
-                    0 => $crate::prelude::LogLevel::Error,
-                    1 => $crate::prelude::LogLevel::Warn,
-                    2 => $crate::prelude::LogLevel::Info,
-                    3 => $crate::prelude::LogLevel::Debug,
-                    _ => $crate::prelude::LogLevel::Trace,
-                }.to_level_filter();
-
-                $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), log_level)
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                $args.$verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
 
                 $body
 

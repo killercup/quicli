@@ -8,9 +8,8 @@ struct Cli {
     /// How many?
     #[structopt(long = "amount", default_value = "3")]
     amount: i32,
-    /// Pass many times for more log output
-    #[structopt(long = "verbosity", short = "v", parse(from_occurrences))]
-    verbosity: u8,
+    #[structopt(flatten)]
+    verbosity: Verbosity,
 }
 #[derive(Deserialize)]
 struct Commit {

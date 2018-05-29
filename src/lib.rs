@@ -31,6 +31,7 @@ extern crate rayon;
 #[cfg(feature = "full-throttle")]
 pub mod fs;
 mod main_macro;
+mod log_level;
 
 mod reexports {
     #[cfg(feature = "full-throttle")]
@@ -74,8 +75,5 @@ pub mod prelude {
     #[cfg(feature = "full-throttle")]
     pub use fs::*;
 
-    #[doc(hidden)]
-    pub use env_logger::Builder as LoggerBuilder;
-    #[doc(hidden)]
-    pub use log::Level as LogLevel;
+    pub use log_level::Verbosity;
 }
