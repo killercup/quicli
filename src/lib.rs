@@ -25,13 +25,14 @@ extern crate failure;
 extern crate log;
 extern crate env_logger;
 
+extern crate clap_verbosity_flag;
+
 #[cfg(feature = "full-throttle")]
 extern crate rayon;
 
 #[cfg(feature = "full-throttle")]
 pub mod fs;
 mod main_macro;
-mod log_level;
 
 mod reexports {
     #[cfg(feature = "full-throttle")]
@@ -46,6 +47,8 @@ mod reexports {
     }
     #[doc(hidden)]
     pub use structopt::StructOpt;
+
+    pub use clap_verbosity_flag::Verbosity;
 
     #[doc(hidden)]
     pub use failure_derive::*;
@@ -74,6 +77,4 @@ pub mod prelude {
 
     #[cfg(feature = "full-throttle")]
     pub use fs::*;
-
-    pub use log_level::Verbosity;
 }
