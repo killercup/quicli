@@ -179,7 +179,7 @@ dependencies = [
 name = "commit-msg-gen"
 version = "0.1.0"
 dependencies = [
- "quicli 0.2.0",
+ "quicli 0.3.0",
  "reqwest 0.8.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.63 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -413,7 +413,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "head"
 version = "0.1.0"
 dependencies = [
- "quicli 0.2.0",
+ "quicli 0.3.0",
 ]
 
 [[package]]
@@ -843,7 +843,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "quicli"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap-verbosity-flag 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.10 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1265,7 +1265,7 @@ name = "thumbify"
 version = "0.1.0"
 dependencies = [
  "image 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "quicli 0.2.0",
+ "quicli 0.3.0",
 ]
 
 [[package]]
@@ -1538,7 +1538,7 @@ name = "verbosity"
 version = "0.1.0"
 dependencies = [
  "assert_cli 0.5.4 (registry+https://github.com/rust-lang/crates.io-index)",
- "quicli 0.2.0",
+ "quicli 0.3.0",
 ]
 
 [[package]]

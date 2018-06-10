@@ -6,10 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-06-10
+
 ### Added
 
 - The full code of the example projects from the guides is now also available in
   the repository's [`examples/`] directory.
+- A `full-throttle` feature was added and is enabled by default. Most
+  dependencies are now optional and only available when this feature (or the
+  dependency itself) is enabled. In practice, this means you can easily opt-out
+  of default quicli features and only enable what you need.
 
 [`examples/`]: https://github.com/killercup/quicli/tree/master/examples
 
@@ -20,6 +26,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - `prelude::LoggerBuiler` has been renamed to `prelude::LoggerBuilder`
+- Now prints all causes after printing error in `main!`
+- Update rayon to 1.0
+- We now use the new [clap-verbosity-flag] crate for adding that `-v` flag:
+    
+    ```rust
+    #[derive(Debug, StructOpt)]
+    struct Cli {
+        #[structopt(flatten)]
+        verbosity: Verbosity,
+    }
+    ```
+
+[clap-verbosity-flag]: https://crates.io/crates/clap-verbosity-flag
 
 ## [0.2.0] - 2018-02-11
 
@@ -92,7 +111,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Commit Message generator example
 - read/write file functions
 
-[Unreleased]: https://github.com/killercup/quicli/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/killercup/quicli/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/killercup/quicli/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/killercup/quicli/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/killercup/quicli/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/killercup/quicli/compare/v0.1.2...v0.1.3
