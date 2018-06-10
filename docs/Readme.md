@@ -43,7 +43,7 @@ Add _quicli_ as an dependency by adding this line
 to the `Cargo.toml` file:
 
 ```toml file=Cargo.toml
-quicli = "0.2"
+quicli = "0.3"
 ```
 
 ## Import quicli

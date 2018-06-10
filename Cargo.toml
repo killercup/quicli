@@ -1,6 +1,6 @@
 [package]
 name = "quicli"
-version = "0.2.0"
+version = "0.3.0"
 description = "Quickly build cool CLI apps in Rust."
 authors = ["Pascal Hertleif <killercup@gmail.com>"]
 readme = "Readme.md"

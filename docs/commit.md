@@ -23,7 +23,7 @@ authors = ["Your Name <your@email.address>"]
 Add quicli to your dependencies:
 
 ```toml file=Cargo.toml
-quicli = "0.2"
+quicli = "0.3"
 ```
 
 We'll get out commit messages from the glorious website
