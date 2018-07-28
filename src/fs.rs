@@ -55,10 +55,13 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
 ///
 /// ```rust
 /// # extern crate quicli;
+/// # use std::env;
 /// # use quicli::prelude::*;
 /// # fn main() { run().unwrap() }
 /// # fn run() -> Result<()> {
-/// write_to_file("/tmp/asdasidz81zasda", "foobar")?;
+/// let mut dir = env::temp_dir();
+/// dir.push("asdasidz81zasda");
+/// write_to_file(dir.as_path(), "foobar")?;
 /// # Ok(()) }
 /// ```
 pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
