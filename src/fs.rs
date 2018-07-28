@@ -55,10 +55,13 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
 ///
 /// ```rust
 /// # extern crate quicli;
+/// # extern crate tempfile;
 /// # use quicli::prelude::*;
 /// # fn main() { run().unwrap() }
 /// # fn run() -> Result<()> {
-/// write_to_file("/tmp/asdasidz81zasda", "foobar")?;
+/// let dir = tempfile::tempdir()?;
+/// let filepath = dir.path().join("asdasidz81zasda");
+/// write_to_file(filepath, "foobar")?;
 /// # Ok(()) }
 /// ```
 pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
