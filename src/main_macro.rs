@@ -20,7 +20,9 @@
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// Most basic form.
+///
+/// ```rust,no_run
 /// #[macro_use] extern crate quicli;
 /// use quicli::prelude::*;
 ///
@@ -29,23 +31,67 @@
 ///     println!("{}", x);
 /// });
 /// ```
+///
+/// With command line arguments.
+///
+/// ```rust,ignore
+/// #[macro_use] extern crate quicli;
+/// use quicli::prelude::*;
+/// use std::path::PathBuf;
+///
+/// #[derive(Debug, StructOpt)]
+/// struct Cli {
+///     /// The config file for the cli app.
+///     #[structopt(long = "config", short = "c", parse(from_os_str))]
+///     config: PathBuf,
+/// }
+///
+/// main!(|args: Cli| {
+///     let x = read_file(&args.config)?;
+///     println!("{}", x);
+/// });
+/// ```
+///
+/// With command line arguments including a verbosity flag.
+///
+/// ```rust,ignore
+/// #[macro_use] extern crate quicli;
+/// use quicli::prelude::*;
+/// use std::path::PathBuf;
+///
+/// #[derive(Debug, StructOpt)]
+/// struct Cli {
+///     /// The config file for the cli app.
+///     #[structopt(long = "config", short = "c", parse(from_os_str))]
+///     config: PathBuf,
+///     #[structopt(flatten)]
+///     verbosity: Verbosity,
+/// }
+///
+/// main!(|args: Cli, log_level: Verbosity| {
+///     let x = read_file(&args.config)?;
+///     println!("{}", x);
+/// });
+/// ```
 #[macro_export]
 macro_rules! main {
     (|$args:ident: $cli:ty, log_level: $verbosity:ident| $body:expr) => {
         fn main() {
-            fn run() -> $crate::prelude::Result<()> {
-                let $args = <$cli>::from_args();
-                $args.$verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
-
+            fn run($args: $cli) -> $crate::prelude::Result<()> {
                 $body
-
+                #[allow(unreachable_code)]
                 Ok(())
             }
 
-            if let Err(e) = run() {
-                eprintln!("error: {}", e);
+            let $args = <$cli>::from_args();
+            // This cannot fail because we control the main method, so no-one else can register a
+            // log handler before us.
+            $args.$verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))
+                .expect("logger setup should never fail, this is a bug in quicli");
+            if let Err(e) = run($args) {
+                error!("{}", e);
                 for cause in e.iter_causes() {
-                    eprintln!("caused by: {}", cause);
+                    error!("caused by {}", cause);
                 }
                 ::std::process::exit(1);
             }
@@ -54,22 +100,23 @@ macro_rules! main {
 
     (|$args:ident: $cli:ty| $body:expr) => {
         fn main() {
-            fn run() -> $crate::prelude::Result<()> {
-                let $args = <$cli>::from_args();
-                $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
-
+            fn run($args: $cli) -> $crate::prelude::Result<()> {
                 $body
-
+                #[allow(unreachable_code)]
                 Ok(())
             }
 
-            if let Err(e) = run() {
-                eprintln!("error: {}", e);
-                for cause in e.causes().skip(1) {
-                    eprintln!("caused by: {}", cause);
+            let $args = <$cli>::from_args();
+            $crate::prelude::LoggerBuilder::new()
+                .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")),
+                        $crate::prelude::LogLevel::Error.to_level_filter())
+                .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                .try_init().expect("logger setup should never fail, this is a bug in quicli");
+
+            if let Err(e) = run($args) {
+                error!("{}", e);
+                for cause in e.iter_causes() {
+                    error!("caused by {}", cause);
                 }
                 ::std::process::exit(1);
             }
@@ -81,19 +128,21 @@ macro_rules! main {
     ($body:expr) => {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
-                $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
-
                 $body
+                #[allow(unreachable_code)]
                 Ok(())
             }
 
+            $crate::prelude::LoggerBuilder::new()
+                .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")),
+                        $crate::prelude::LogLevel::Error.to_level_filter())
+                .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                .try_init().expect("logger setup should never fail, this is a bug in quicli");
+
             if let Err(e) = run() {
-                eprintln!("error: {}", e);
-                for cause in e.causes().skip(1) {
-                    eprintln!("caused by: {}", cause);
+                error!("{}", e);
+                for cause in e.iter_causes() {
+                    eprintln!("caused by {}", cause);
                 }
                 ::std::process::exit(1);
             }
