@@ -34,7 +34,7 @@
 ///
 /// With command line arguments.
 ///
-/// ```rust,no_run
+/// ```rust,ignore
 /// #[macro_use] extern crate quicli;
 /// use quicli::prelude::*;
 /// use std::path::PathBuf;
@@ -54,7 +54,7 @@
 ///
 /// With command line arguments including a verbosity flag.
 ///
-/// ```rust,no_run
+/// ```rust,ignore
 /// #[macro_use] extern crate quicli;
 /// use quicli::prelude::*;
 /// use std::path::PathBuf;
