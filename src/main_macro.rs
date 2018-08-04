@@ -34,7 +34,7 @@
 ///
 /// With command line arguments.
 ///
-/// ```rust,ignore
+/// ```rust,no_run
 /// #[macro_use] extern crate quicli;
 /// use quicli::prelude::*;
 /// use std::path::PathBuf;
@@ -54,7 +54,7 @@
 ///
 /// With command line arguments including a verbosity flag.
 ///
-/// ```rust,ignore
+/// ```rust,no_run
 /// #[macro_use] extern crate quicli;
 /// use quicli::prelude::*;
 /// use std::path::PathBuf;
@@ -68,7 +68,7 @@
 ///     verbosity: Verbosity,
 /// }
 ///
-/// main!(|args: Cli, log_level: Verbosity| {
+/// main!(|args: Cli, log_level: verbosity| {
 ///     let x = read_file(&args.config)?;
 ///     println!("{}", x);
 /// });
