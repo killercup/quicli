@@ -77,6 +77,7 @@
 macro_rules! main {
     (|$args:ident: $cli:ty, log_level: $verbosity:ident| $body:expr) => {
         fn main() {
+            #[allow(unused_variables)]
             fn run($args: $cli) -> $crate::prelude::Result<()> {
                 $body
                 #[allow(unreachable_code)]
