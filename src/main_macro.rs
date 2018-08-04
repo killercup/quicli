@@ -142,7 +142,7 @@ macro_rules! main {
             if let Err(e) = run() {
                 error!("{}", e);
                 for cause in e.iter_causes() {
-                    eprintln!("caused by {}", cause);
+                    error!("caused by {}", cause);
                 }
                 ::std::process::exit(1);
             }
