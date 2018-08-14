@@ -64,6 +64,9 @@ mod reexports {
     #[doc(hidden)]
     pub use env_logger::Builder as LoggerBuilder;
     #[doc(hidden)]
+    pub use env_logger::init as env_logger_init;
+
+    #[doc(hidden)]
     pub use log::Level as LogLevel;
 }
 
