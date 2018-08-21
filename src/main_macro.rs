@@ -68,7 +68,7 @@ macro_rules! main {
 
             if let Err(e) = run() {
                 eprintln!("error: {}", e);
-                for cause in e.causes().skip(1) {
+                for cause in e.iter_causes() {
                     eprintln!("caused by: {}", cause);
                 }
                 ::std::process::exit(1);
@@ -92,7 +92,7 @@ macro_rules! main {
 
             if let Err(e) = run() {
                 eprintln!("error: {}", e);
-                for cause in e.causes().skip(1) {
+                for cause in e.iter_causes() {
                     eprintln!("caused by: {}", cause);
                 }
                 ::std::process::exit(1);
