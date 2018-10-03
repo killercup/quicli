@@ -8,14 +8,8 @@ matrix:
     - RUST_BACKTRACE=full
     script: cargo test --all
   - rust: stable
-    env:
-    - DANCE=DOCS_WALTZ
-    - WALTZ_VERSION=0.1.3
-    before_script: |
-        if [[ -z "$(which waltz)" ]] || [[ -z "$(waltz --version | grep $WALTZ_VERSION)" ]]; then \
-        cargo install waltz_cli --vers $WALTZ_VERSION --force; \
-        else echo "waltz already installed"; \
-        fi
+    env: DANCE=DOCS_WALTZ
+    before_script: curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git killercup/waltz --tag waltz_cli-0.1.4
     script: docs/_test.sh
 notifications:
   email:
