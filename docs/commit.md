@@ -35,7 +35,7 @@ Let's use [reqwest]:
 [reqwest]: https://docs.rs/reqwest/0.8.4/reqwest/
 
 ```toml file=Cargo.toml
-reqwest = "0.8"
+reqwest = "0.9"
 ```
 
 The response will be in JSON,
