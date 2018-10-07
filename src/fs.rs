@@ -3,7 +3,7 @@
 //! These are rather simple, but provide a quick and easy way to to common
 //! tasks. Also, they have great error messages.
 
-extern crate glob;
+extern crate globwalk;
 
 use std::path::{Path, PathBuf};
 use std::io::{BufReader, BufWriter, Read, Write};
@@ -91,25 +91,27 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// let markdown_files = glob("*.md")?;
 /// assert_eq!(markdown_files.len(), 2);
 ///
-/// let weird_files = glob("**/*.weird");
-/// assert!(weird_files.is_err());
-/// if let Err(e) = weird_files {
-///     assert_eq!(e.to_string(), "No files match pattern `**/*.weird`".to_string());
+/// let image_files = glob("**/*.{png,jpg,gif}");
+/// assert!(image_files.is_err());
+/// if let Err(e) = image_files {
+///     assert_eq!(e.to_string(), "No files match pattern `**/*.{png,jpg,gif}`".to_string());
 /// }
 /// # Ok(()) }
 /// ```
-pub fn glob(pattern: &str) -> Result<Vec<PathBuf>> {
-    use self::glob::{glob_with, MatchOptions};
+pub fn glob(patterns: &str) -> Result<Vec<PathBuf>> {
+    use self::globwalk::glob;
 
-    let options: MatchOptions = Default::default();
-    let files: Vec<_> = glob_with(pattern, &options)?
+    let files: Vec<_> = glob(patterns)?
+        .max_depth(1)
+        .into_iter()
         .filter_map(StdResult::ok)
+        .map(|dir_entry| dir_entry.path().to_owned())
         .collect();
 
     ensure!(
         files.get(0).is_some(),
         "No files match pattern `{}`",
-        pattern
+        patterns
     );
 
     Ok(files)
