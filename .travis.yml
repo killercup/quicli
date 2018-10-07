@@ -9,7 +9,7 @@ matrix:
     script: cargo test --all
   - rust: stable
     env: DANCE=DOCS_WALTZ
-    before_script: curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git killercup/waltz --tag waltz_cli-0.1.4
+    before_script: curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git killercup/waltz --tag waltz_cli-0.1.4 --force
     script: docs/_test.sh
 notifications:
   email:
