@@ -5,5 +5,5 @@ authors = ["Your Name <your@email.address>"]
 
 [dependencies]
 quicli = "0.3"
-reqwest = "0.8"
+reqwest = "0.9"
 serde = "1"
