@@ -47,6 +47,11 @@ macro_rules! main {
                 for cause in e.iter_causes() {
                     eprintln!("caused by: {}", cause);
                 }
+                let bt_string = e.backtrace().to_string();
+                if !bt_string.is_empty() {
+                    eprintln!();
+                    eprintln!("{}", e.backtrace());
+                }
                 ::std::process::exit(1);
             }
         }
@@ -71,6 +76,11 @@ macro_rules! main {
                 for cause in e.iter_causes() {
                     eprintln!("caused by: {}", cause);
                 }
+                let bt_string = e.backtrace().to_string();
+                if !bt_string.is_empty() {
+                    eprintln!();
+                    eprintln!("{}", e.backtrace());
+                }
                 ::std::process::exit(1);
             }
         }
@@ -94,6 +104,11 @@ macro_rules! main {
                 eprintln!("error: {}", e);
                 for cause in e.iter_causes() {
                     eprintln!("caused by: {}", cause);
+                }
+                let bt_string = e.backtrace().to_string();
+                if !bt_string.is_empty() {
+                    eprintln!();
+                    eprintln!("{}", e.backtrace());
                 }
                 ::std::process::exit(1);
             }
