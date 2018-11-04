@@ -15,11 +15,10 @@ struct Cli {
     /// Where do you want to save the thumbnails?
     #[structopt(long = "output", short = "o", default_value = "thumbnails")]
     thumb_dir: String,
-
+    /// Should we clean the output directory?
     #[structopt(long="clean-dir")]
     clean_dir: bool,
 }
-
 main!(|args: Cli, log_level: verbosity| {
     let files = glob(&args.pattern)?;
     let thumb_dir = std::path::Path::new(&args.thumb_dir);
