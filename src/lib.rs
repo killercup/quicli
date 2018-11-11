@@ -33,6 +33,7 @@ extern crate rayon;
 #[cfg(feature = "full-throttle")]
 pub mod fs;
 mod main_macro;
+mod errors;
 
 mod reexports {
     #[cfg(feature = "full-throttle")]
@@ -77,8 +78,7 @@ mod reexports {
 pub mod prelude {
     pub use reexports::*;
 
-    /// A handy alias for `Result` that carries a generic error type.
-    pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
+    pub use errors::{Result, NoneErrorContext};
 
     #[cfg(feature = "full-throttle")]
     pub use fs::*;
