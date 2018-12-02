@@ -35,7 +35,11 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                $args.$verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
+                if let Some(_) = ::std::env::var_os("RUST_LOG") {
+                    $crate::prelude::env_logger_init()
+                } else {
+                    $args.$verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
+                }
 
                 $body
 
@@ -56,10 +60,14 @@ macro_rules! main {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
                 let $args = <$cli>::from_args();
-                $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                if let Some(_) = ::std::env::var_os("RUST_LOG") {
+                    $crate::prelude::env_logger_init()
+                } else {
+                    $crate::prelude::LoggerBuilder::new()
+                        .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
+                        .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                        .try_init()?;
+                }
 
                 $body
 
@@ -81,10 +89,14 @@ macro_rules! main {
     ($body:expr) => {
         fn main() {
             fn run() -> $crate::prelude::Result<()> {
-                $crate::prelude::LoggerBuilder::new()
-                    .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
-                    .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
-                    .try_init()?;
+                if let Some(_) = ::std::env::var_os("RUST_LOG") {
+                    $crate::prelude::env_logger_init()
+                } else {
+                    $crate::prelude::LoggerBuilder::new()
+                        .filter(Some(&env!("CARGO_PKG_NAME").replace("-", "_")), $crate::prelude::LogLevel::Error.to_level_filter())
+                        .filter(None, $crate::prelude::LogLevel::Warn.to_level_filter())
+                        .try_init()?;
+                }
 
                 $body
                 Ok(())
