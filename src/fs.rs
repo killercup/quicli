@@ -4,6 +4,7 @@
 //! tasks. Also, they have great error messages.
 
 extern crate globwalk;
+extern crate remove_dir_all;
 
 use std::path::{Path, PathBuf};
 use std::io::{BufReader, BufWriter, Read, Write};
@@ -15,6 +16,7 @@ use failure::{Error, ResultExt};
 use prelude::Result;
 
 pub use std::fs::create_dir_all as create_dir;
+pub use self::remove_dir_all::remove_dir_all;
 
 /// Read file content into string
 ///

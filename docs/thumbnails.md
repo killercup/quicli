@@ -117,6 +117,14 @@ Let's also add an option to specify _where_ to save those thumbnails!
     thumb_dir: String,
 ```
 
+And a flag to specify wether we want to clean it before creating our thumbnails!
+
+``` rust file=src/main.rs
+    /// Should we clean the output directory?
+    #[structopt(long="clean-dir")]
+    clean_dir: bool,
+```
+
 There we go.
 Oh, wait, let's not forget to close that struct definition:
 
@@ -146,13 +154,22 @@ gives you a list of all the file paths that match the pattern.
     let files = glob(&args.pattern)?;
 ```
 
-And, while we are at it,
-let's also create the output directory
-if it doesn't exist yet
+Before creating any of the thumbnails, let's clean-up the output directory,
+if requested by the caller.
+_quicli_ provides `remove_dir_all` to clean any directory tree you'd like!
+
+```rust file=src/main.rs
+    let thumb_dir = std::path::Path::new(&args.thumb_dir);
+    if args.clean_dir && thumb_dir.exists() {
+        remove_dir_all(&thumb_dir)?;
+    }
+```
+
+Now we're ready to (re)create the output directory.
 (another function _quicli_ gives you):
 
 ```rust file=src/main.rs
-    create_dir(&args.thumb_dir)?;
+    create_dir(&thumb_dir)?;
 ```
 
 Great, that was the first step.
