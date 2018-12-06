@@ -3,32 +3,7 @@
 //! You can find some examples and more information on how to use this crate
 //! in the [README](https://github.com/killercup/quicli).
 
-#![allow(unused_imports)]
 #![deny(missing_docs)]
-
-#[cfg(feature = "full-throttle")]
-#[macro_use]
-extern crate serde_derive;
-#[cfg(feature = "full-throttle")]
-extern crate serde;
-
-#[macro_use]
-extern crate structopt_derive;
-extern crate structopt;
-
-#[macro_use]
-extern crate failure_derive;
-#[macro_use]
-extern crate failure;
-
-#[macro_use]
-extern crate log;
-extern crate env_logger;
-
-extern crate clap_verbosity_flag;
-
-#[cfg(feature = "full-throttle")]
-extern crate rayon;
 
 #[cfg(feature = "full-throttle")]
 pub mod fs;
@@ -37,7 +12,7 @@ mod main_macro;
 mod reexports {
     #[cfg(feature = "full-throttle")]
     #[doc(hidden)]
-    pub use serde_derive::*;
+    pub use serde_derive::{Deserialize, Serialize};
 
     #[doc(hidden)]
     pub use structopt_derive::*;
@@ -51,12 +26,12 @@ mod reexports {
     pub use clap_verbosity_flag::Verbosity;
 
     #[doc(hidden)]
-    pub use failure_derive::*;
+    pub use failure_derive::Fail;
     #[doc(hidden)]
-    pub use failure::*;
+    pub use failure::{Error, ResultExt, bail, ensure, err_msg};
 
     #[doc(hidden)]
-    pub use log::*;
+    pub use log::{error, warn, info, debug, trace};
 
     #[cfg(feature = "full-throttle")]
     pub use rayon::prelude::*;
