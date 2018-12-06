@@ -2,7 +2,9 @@
 name = "thumbify"
 version = "0.1.0"
 authors = ["Your Name <your@email.address>"]
+edition = "2018"
 
 [dependencies]
 quicli = "0.3"
+structopt = "0.2"
 image = "0.18"

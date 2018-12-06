@@ -2,8 +2,10 @@
 name = "commit-msg-gen"
 version = "0.1.0"
 authors = ["Your Name <your@email.address>"]
+edition = "2018"
 
 [dependencies]
 quicli = "0.3"
+structopt = "0.2"
 reqwest = "0.9"
 serde = "1"

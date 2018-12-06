@@ -9,16 +9,14 @@ repository = "https://github.com/killercup/quicli"
 homepage = "https://killercup.github.io/quicli/"
 categories = ["command-line-interface"]
 keywords = ["cli", "prelude"]
+edition = "2018"
 
 [dependencies]
 failure = "0.1.2"
 failure_derive = "0.1.2"
 serde = { version = "1.0.27", optional = true}
 serde_derive = { version = "1.0.27", optional = true }
-structopt = "0.2.8"
-structopt-derive = "0.2.8"
 log = "0.4.1"
-env_logger = "0.5.3"
 globwalk = { version = "0.3", optional = true }
 rayon = { version = "1.0", optional = true }
 clap-verbosity-flag = "0.1.0"

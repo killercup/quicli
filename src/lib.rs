@@ -7,37 +7,27 @@
 
 #[cfg(feature = "full-throttle")]
 pub mod fs;
-mod main_macro;
 
 mod reexports {
     #[cfg(feature = "full-throttle")]
     #[doc(hidden)]
     pub use serde_derive::{Deserialize, Serialize};
 
-    #[doc(hidden)]
-    pub use structopt_derive::*;
-    #[doc(hidden)]
-    pub mod structopt {
-        pub use structopt::*;
-    }
-    #[doc(hidden)]
-    pub use structopt::StructOpt;
-
     pub use clap_verbosity_flag::Verbosity;
 
     #[doc(hidden)]
     pub use failure_derive::Fail;
     #[doc(hidden)]
-    pub use failure::{Error, ResultExt, bail, ensure, err_msg};
+    pub use failure::{Error, ResultExt, bail, ensure, format_err, err_msg};
 
     #[doc(hidden)]
-    pub use log::{error, warn, info, debug, trace};
+    pub use log::{error, warn, info, debug, trace, log_enabled};
 
     #[cfg(feature = "full-throttle")]
     pub use rayon::prelude::*;
 
     #[doc(hidden)]
-    pub use env_logger::Builder as LoggerBuilder;
+    pub use log;
     #[doc(hidden)]
     pub use log::Level as LogLevel;
 }
@@ -50,11 +40,11 @@ mod reexports {
 /// (If you don't like glob imports, feel free to import the items 1-by-1. You
 /// will sadly miss out on a bunch of derive macros, though.)
 pub mod prelude {
-    pub use reexports::*;
+    pub use crate::reexports::*;
 
     /// A handy alias for `Result` that carries a generic error type.
-    pub type CliResult<T> = ::std::result::Result<T, ::exitfailure::ExitFailure>;
+    pub type CliResult = ::std::result::Result<(), ::exitfailure::ExitFailure>;
 
     #[cfg(feature = "full-throttle")]
-    pub use fs::*;
+    pub use crate::fs::*;
 }

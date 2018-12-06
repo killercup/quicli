@@ -6,6 +6,9 @@ And to make it more interesting than a boring old shell script,
 let's do in with a bit of concurrency
 and a nice user experience!
 
+This guide assumes you've already read the other two guides
+and now want to dive into some of the more advanced features.
+
 This is an adaptation from [this example][cookbook-thumb]
 from the [Rust Cookbook].
 
@@ -24,14 +27,16 @@ You'll find a `Cargo.toml` file that contains:
 name = "thumbify"
 version = "0.1.0"
 authors = ["Your Name <your@email.address>"]
+edition = "2018"
 
 [dependencies]
 ```
 
-As always, add _quicli_ to your dependencies:
+As always, add _quicli_ and _structopt_ to your dependencies:
 
 ```toml file=Cargo.toml
 quicli = "0.3"
+structopt = "0.2"
 ```
 
 Since we need to resize images,
@@ -50,14 +55,8 @@ image = "0.18"
 Let's ~~load~~ invite our new friends:
 
 ```rust file=src/main.rs
-#[macro_use] extern crate quicli;
-extern crate image;
-```
-
-And let's also grab everything from _quicli_:
-
-```rust file=src/main.rs
 use quicli::prelude::*;
+use structopt::StructOpt;
 ```
 
 What other stuff do we need?
@@ -139,7 +138,18 @@ Yeah, now we're done.
 Onto implementing features!
 
 ```rust file=src/main.rs
-main!(|args: Cli, log_level: verbosity| {
+fn main() -> CliResult {
+    let args = Cli::from_args();
+```
+
+Quick interlude before we _really_ get started:
+Do you remember how we set up logging before,
+by calling a method with the name of our crate?
+We'll do a more fancy approach here and use the `env!` macro
+to get the name from cargo itself!
+
+```rust file=src/main.rs
+    args.verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
 ```
 
 ### Globs
@@ -334,7 +344,9 @@ Now, let's print that number and we are done!
         thumbnail_count,
         files.len()
     );
-});
+
+    Ok(())
+}
 ```
 
 ## Give it a spin!

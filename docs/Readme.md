@@ -35,15 +35,19 @@ You should end up with a `Cargo.toml` that looks like this:
 name = "head"
 version = "0.1.0"
 authors = ["Your Name <your@email.address>"]
+edition = "2018"
 
 [dependencies]
 ```
 
-Add _quicli_ as an dependency by adding this line
-to the `Cargo.toml` file:
+Add _quicli_ as an dependency,
+as well as _structopt_
+(for dealing with command line arguments)
+by adding this to the `Cargo.toml` file:
 
 ```toml file=Cargo.toml
 quicli = "0.3"
+structopt = "0.2"
 ```
 
 ## Import quicli
@@ -53,10 +57,10 @@ Open up your `src/main.rs`.
 Let's import all the good stuff:
 
 ```rust file=src/main.rs
-#[macro_use] extern crate quicli;
 use quicli::prelude::*;
+use structopt::StructOpt;
 ```
- 
+
 That's it. That's all the imports you should need for now!
 
 ## Write a CLI struct
@@ -93,49 +97,51 @@ The next step is the easiest one yet;
 You just have to implement all the features you want to add!
 Just kidding, let's take it one step at a time.
 
-quicli comes with a handy macro called `main!`.
-You can use it as an entry point in your program,
-and instead of the usual `fn main`.
-Its purpose it to reduce the amount boilerplate code you need to write.
-Currently, it gives you
-access to the parsed CLI args,
-sets up logging,
-and let's you use [the `?` operator][try-op].
+We'll start with a function called `main`.
+This is where our program starts,
+calls other functions,
+and then ends.
 
-[try-op]: https://doc.rust-lang.org/book/second-edition/ch09-02-recoverable-errors-with-result.html#propagating-errors
+You might have seen that you can use
+[the `?` operator][try-op]
+in Rust function to propagate errors.
+This is super convenient to deal with errors.
+To be able to use it,
+our main function needs to return a `Result`.
+For that,
+quicli contains a handy type called `CliResult`,
+that will return pretty errors.
+At the end of `main`,
+we then return `Ok(())`,
+(a value that says "everything okay, nothing else").
 
-The content of `main!` looks like a closure,
-and you can specify up to two parameters (they are both optional):
+[try-op]: https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#propagating-errors
 
-1. The CLI arguments
-   (i.e., if you write `args: Cli` you get an `args` of the `Cli` type defined above)
-2. The field in your `Cli` struct that defines the log level
-   (just specify the field name and the macro will set up logging automatically)
-
-In the body of this "closure" you can write regular Rust code,
-just like in a `fn main`.
-The only noticable difference is that you can use `?`
-to exit the function on errors
-and print a nice human-readable error message.
-You can find out more about the main macro in [quicli's API documentation].
-
-[quicli's API documentation]: https://docs.rs/quicli/0.2.0/quicli/macro.main.html
+Next, we'll want to enable logging.
+For that we'll use the `verbosity` field we added earlier.
+It is of a special type that you can call `setup_env_logger` on,
+with the name of the crate you want to log by default.
 
 Alright, are you all set?
 Then let's implement `head`!
 
 ```rust file=src/main.rs
-main!(|args: Cli, log_level: verbosity| {
+fn main() -> CliResult {
+    let args = Cli::from_args();
+    args.verbosity.setup_env_logger("head")?;
+
     let content = read_file(&args.file)?;
     let content_lines = content.lines();
     let first_n_lines = content_lines.take(args.count);
-    
+
     info!("Reading first {} lines of {:?}", args.count, args.file);
 
     for line in first_n_lines {
         println!("{}", line);
     }
-});
+
+    Ok(())
+}
 ```
 
 Alternatively, you could also write this more concisely
@@ -144,12 +150,14 @@ Alternatively, you could also write this more concisely
 [Iterator]: https://doc.rust-lang.org/book/second-edition/ch13-02-iterators.html
 
 ```rust
-main!(|args: Cli, log_level: verbosity| {
+fn main() -> CliResult {
+    let args = Cli::from_args();
+
     read_file(&args.file)?
         .lines()
         .take(args.count)
         .for_each(|line| println!("{}", line));
-});
+};
 ```
 
 ## Give it a spin!
