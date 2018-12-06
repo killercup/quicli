@@ -3,35 +3,28 @@
 //! These are rather simple, but provide a quick and easy way to to common
 //! tasks. Also, they have great error messages.
 
-extern crate globwalk;
-extern crate remove_dir_all;
-
 use std::path::{Path, PathBuf};
 use std::io::{BufReader, BufWriter, Read, Write};
 use std::fs::File;
 use std::result::Result as StdResult;
 
-use failure::{Error, ResultExt};
-
-use prelude::Result;
+use failure::{Error, ResultExt, ensure};
 
 pub use std::fs::create_dir_all as create_dir;
-pub use self::remove_dir_all::remove_dir_all;
+pub use remove_dir_all::remove_dir_all;
 
 /// Read file content into string
 ///
 /// # Examples
 ///
 /// ```rust
-/// # extern crate quicli;
 /// # use quicli::prelude::*;
-/// # fn main() { run().unwrap() }
-/// # fn run() -> Result<()> {
+/// # fn main() -> CliResult {
 /// let x = read_file(".gitignore")?;
 /// assert!(x.len() > 0);
 /// # Ok(()) }
 /// ```
-pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
+pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String, Error> {
     let path = path.as_ref();
     ensure!(
         path.exists() && path.is_file(),
@@ -56,17 +49,14 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate quicli;
-/// # extern crate tempfile;
 /// # use quicli::prelude::*;
-/// # fn main() { run().unwrap() }
-/// # fn run() -> Result<()> {
+/// # fn main() -> CliResult {
 /// let dir = tempfile::tempdir()?;
 /// let filepath = dir.path().join("asdasidz81zasda");
 /// write_to_file(filepath, "foobar")?;
 /// # Ok(()) }
 /// ```
-pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
+pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<(), Error> {
     let path = path.as_ref();
 
     let file =
@@ -86,10 +76,8 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate quicli;
 /// # use quicli::prelude::*;
-/// # fn main() { run().unwrap() }
-/// # fn run() -> Result<()> {
+/// # fn main() -> CliResult {
 /// let markdown_files = glob("*.md")?;
 /// assert_eq!(markdown_files.len(), 2);
 ///
@@ -100,8 +88,8 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<()> {
 /// }
 /// # Ok(()) }
 /// ```
-pub fn glob(patterns: &str) -> Result<Vec<PathBuf>> {
-    use self::globwalk::glob;
+pub fn glob(patterns: &str) -> Result<Vec<PathBuf>, Error> {
+    use globwalk::glob;
 
     let files: Vec<_> = glob(patterns)?
         .max_depth(1)

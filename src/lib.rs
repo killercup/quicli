@@ -3,66 +3,31 @@
 //! You can find some examples and more information on how to use this crate
 //! in the [README](https://github.com/killercup/quicli).
 
-#![allow(unused_imports)]
 #![deny(missing_docs)]
 
 #[cfg(feature = "full-throttle")]
-#[macro_use]
-extern crate serde_derive;
-#[cfg(feature = "full-throttle")]
-extern crate serde;
-
-#[macro_use]
-extern crate structopt_derive;
-extern crate structopt;
-
-#[macro_use]
-extern crate failure_derive;
-#[macro_use]
-extern crate failure;
-
-#[macro_use]
-extern crate log;
-extern crate env_logger;
-
-extern crate clap_verbosity_flag;
-
-#[cfg(feature = "full-throttle")]
-extern crate rayon;
-
-#[cfg(feature = "full-throttle")]
 pub mod fs;
-mod main_macro;
 
 mod reexports {
     #[cfg(feature = "full-throttle")]
     #[doc(hidden)]
-    pub use serde_derive::*;
-
-    #[doc(hidden)]
-    pub use structopt_derive::*;
-    #[doc(hidden)]
-    pub mod structopt {
-        pub use structopt::*;
-    }
-    #[doc(hidden)]
-    pub use structopt::StructOpt;
+    pub use serde_derive::{Deserialize, Serialize};
 
     pub use clap_verbosity_flag::Verbosity;
 
     #[doc(hidden)]
-    pub use failure_derive::*;
+    pub use failure_derive::Fail;
     #[doc(hidden)]
-    pub use failure::*;
+    pub use failure::{Error, ResultExt, bail, ensure, format_err, err_msg};
 
     #[doc(hidden)]
-    pub use log::*;
+    pub use log::{error, warn, info, debug, trace, log_enabled};
 
     #[cfg(feature = "full-throttle")]
     pub use rayon::prelude::*;
 
     #[doc(hidden)]
-    pub use env_logger::Builder as LoggerBuilder;
+    pub use log;
     #[doc(hidden)]
     pub use log::Level as LogLevel;
 }
@@ -75,11 +40,11 @@ mod reexports {
 /// (If you don't like glob imports, feel free to import the items 1-by-1. You
 /// will sadly miss out on a bunch of derive macros, though.)
 pub mod prelude {
-    pub use reexports::*;
+    pub use crate::reexports::*;
 
     /// A handy alias for `Result` that carries a generic error type.
-    pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
+    pub type CliResult = ::std::result::Result<(), ::exitfailure::ExitFailure>;
 
     #[cfg(feature = "full-throttle")]
-    pub use fs::*;
+    pub use crate::fs::*;
 }

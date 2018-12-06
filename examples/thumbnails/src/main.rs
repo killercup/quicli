@@ -1,6 +1,5 @@
-#[macro_use] extern crate quicli;
-extern crate image;
 use quicli::prelude::*;
+use structopt::StructOpt;
 /// Make some thumbnails
 #[derive(Debug, StructOpt)]
 struct Cli {
@@ -19,7 +18,9 @@ struct Cli {
     #[structopt(long="clean-dir")]
     clean_dir: bool,
 }
-main!(|args: Cli, log_level: verbosity| {
+fn main() -> CliResult {
+    let args = Cli::from_args();
+    args.verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;
     let files = glob(&args.pattern)?;
     let thumb_dir = std::path::Path::new(&args.thumb_dir);
     if args.clean_dir && thumb_dir.exists() {
@@ -33,7 +34,7 @@ fn make_thumbnail(
     original: &Path,
     thumb_dir: &str,
     longest_edge: u32,
-) -> Result<()> {
+) -> Result<(), Error> {
     let img = image::open(&original)?;
     let thumbnail = img.resize(longest_edge, longest_edge, image::FilterType::Nearest);
     use std::path::PathBuf;
@@ -64,4 +65,6 @@ fn make_thumbnail(
         thumbnail_count,
         files.len()
     );
-});
+
+    Ok(())
+}
