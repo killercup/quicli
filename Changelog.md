@@ -14,6 +14,7 @@ This release is only compatible with Rust 1.31.0 and later.
 
 - The `CliResult` type alias was added as an easy to write type to be used as an
   return type in `main` functions. It uses the `exitfailure` crate internally.
+- The `remove_dir_all` function that works as expected on all platforms.
 
 ### Removed
 
@@ -153,7 +154,7 @@ This release is only compatible with Rust 1.31.0 and later.
 - read/write file functions
 
 [Unreleased]: https://github.com/killercup/quicli/compare/v0.4.0...HEAD
-[0.4.0]: https://github.com/killercup/quicli/compare/v0.4.1...v0.4.0
+[0.4.0]: https://github.com/killercup/quicli/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/killercup/quicli/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/killercup/quicli/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/killercup/quicli/compare/v0.1.4...v0.2.0
