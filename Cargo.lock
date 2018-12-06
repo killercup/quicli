@@ -142,7 +142,7 @@ dependencies = [
 
 [[package]]
 name = "clap-verbosity-flag"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "env_logger 0.5.13 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -992,7 +992,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "quicli"
 version = "0.3.1"
 dependencies = [
- "clap-verbosity-flag 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "clap-verbosity-flag 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "exitfailure 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure_derive 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1842,7 +1842,7 @@ dependencies = [
 "checksum cc 1.0.25 (registry+https://github.com/rust-lang/crates.io-index)" = "f159dfd43363c4d08055a07703eb7a3406b0dac4d0584d96965a3262db3c9d16"
 "checksum cfg-if 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "082bb9b28e00d3c9d39cc03e64ce4cea0f1bb9b3fde493f0cbc008472d22bdf4"
 "checksum clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b957d88f4b6a63b9d70d5f454ac8011819c6efa7727858f458ab71c756ce2d3e"
-"checksum clap-verbosity-flag 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "26de1a8b4a21f6b05c99680edd48a6fded30afcf7aa13f1fa7e5c79198f5bac7"
+"checksum clap-verbosity-flag 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "bda14f5323b2b747f52908c5b7b8af7790784088bc7c2957a11695e39ad476dc"
 "checksum cloudabi 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "ddfc5b9aa5d4507acaf872de71051dfd0e309860e88966e1051e462a077aac4f"
 "checksum color_quant 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0dbbb57365263e881e805dc77d94697c9118fd94d8da011240555aa7b23445bd"
 "checksum colored 1.6.1 (registry+https://github.com/rust-lang/crates.io-index)" = "dc0a60679001b62fb628c4da80e574b9645ab4646056d7c9018885efffe45533"
