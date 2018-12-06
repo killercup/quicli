@@ -5,5 +5,5 @@ authors = ["Your Name <your@email.address>"]
 edition = "2018"
 
 [dependencies]
-quicli = "0.3"
+quicli = "0.4"
 structopt = "0.2"

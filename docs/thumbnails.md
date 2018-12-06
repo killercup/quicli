@@ -35,7 +35,7 @@ edition = "2018"
 As always, add _quicli_ and _structopt_ to your dependencies:
 
 ```toml file=Cargo.toml
-quicli = "0.3"
+quicli = "0.4"
 structopt = "0.2"
 ```
 

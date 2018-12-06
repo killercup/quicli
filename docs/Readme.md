@@ -46,7 +46,7 @@ as well as _structopt_
 by adding this to the `Cargo.toml` file:
 
 ```toml file=Cargo.toml
-quicli = "0.3"
+quicli = "0.4"
 structopt = "0.2"
 ```
 

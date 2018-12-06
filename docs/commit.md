@@ -25,7 +25,7 @@ Add quicli to your dependencies,
 as well as _structopt_:
 
 ```toml file=Cargo.toml
-quicli = "0.3"
+quicli = "0.4"
 structopt = "0.2"
 ```
 
