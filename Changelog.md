@@ -6,6 +6,41 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-12-06
+
+This release is only compatible with Rust 1.31.0 and later.
+
+### Added
+
+- The `CliResult` type alias was added as an easy to write type to be used as an
+  return type in `main` functions. It uses the `exitfailure` crate internally.
+
+### Removed
+
+- The `Result` type alias has been removed from the prelude.
+
+  To migrate from 0.3, please replace `Result<$X>` with `Result<$X, Error>`.
+- Structopt is no longer re-exported.
+
+  To migrate from 0.3, please add `structopt = "0.2"` to your `Cargo.toml`,
+  and add `use structopt::StructOpt;` to your source files.
+- The `main!` macro has been removed. It was the cause of much confusion and
+  was originally introduced to work around the lack of support for using the `?`
+  operator in the `main` function.
+  
+  To migrate from 0.3, you should use a regular `main` function like
+  `fn main() -> CliResult { Ok(()) }`. You'll need to return `Ok(())` at the
+  end to indicate the program was successful.
+  
+  To get access to your CLI arguments, use `let args = Cli::from_args();`
+  (adjust the `Cli` name with the name of your struct that derives `StructOpt`.)
+  
+  To enable logging, it is easiest to add the line
+  `args.verbosity.setup_env_logger(&env!("CARGO_PKG_NAME"))?;` right after the
+  previous one loading the CLI arguments. You can also initialize a custom
+  logger with the right log level directly by accessing
+  `args.verbosity.log_level()`.
+
 ## [0.3.1] - 2018-10-03
 
 ### Changed
@@ -117,8 +152,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Commit Message generator example
 - read/write file functions
 
-[Unreleased]: https://github.com/killercup/quicli/compare/v0.3.1...HEAD
-[0.3.3]: https://github.com/killercup/quicli/compare/v0.3.0...v0.3.1
+[Unreleased]: https://github.com/killercup/quicli/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/killercup/quicli/compare/v0.4.1...v0.4.0
+[0.3.1]: https://github.com/killercup/quicli/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/killercup/quicli/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/killercup/quicli/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/killercup/quicli/compare/v0.1.3...v0.1.4
