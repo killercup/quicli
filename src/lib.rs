@@ -78,7 +78,7 @@ pub mod prelude {
     pub use reexports::*;
 
     /// A handy alias for `Result` that carries a generic error type.
-    pub type Result<T> = ::std::result::Result<T, ::failure::Error>;
+    pub type CliResult<T> = ::std::result::Result<T, ::exitfailure::ExitFailure>;
 
     #[cfg(feature = "full-throttle")]
     pub use fs::*;

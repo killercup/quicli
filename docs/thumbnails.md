@@ -206,7 +206,7 @@ fn make_thumbnail(
     original: &Path,
     thumb_dir: &str,
     longest_edge: u32,
-) -> Result<()> {
+) -> Result<(), Error> {
 ```
 
 What a pretty function signature!

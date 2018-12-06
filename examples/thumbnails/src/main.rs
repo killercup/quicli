@@ -33,7 +33,7 @@ fn make_thumbnail(
     original: &Path,
     thumb_dir: &str,
     longest_edge: u32,
-) -> Result<()> {
+) -> Result<(), Error> {
     let img = image::open(&original)?;
     let thumbnail = img.resize(longest_edge, longest_edge, image::FilterType::Nearest);
     use std::path::PathBuf;
