@@ -157,6 +157,8 @@ fn main() -> CliResult {
         .lines()
         .take(args.count)
         .for_each(|line| println!("{}", line));
+    
+    Ok(())
 };
 ```
 
