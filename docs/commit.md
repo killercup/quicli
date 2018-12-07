@@ -152,7 +152,7 @@ We don't have to care about those right now.
 
 Nice!
 Now, with that out of the way,
-let's write the typical `main!` macro,
+let's write the typical `main` function,
 but this time with a loop
 in which we request some wonderful commits,
 and print them.
