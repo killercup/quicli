@@ -89,10 +89,11 @@ pub fn write_to_file<P: AsRef<Path>>(path: P, content: &str) -> Result<(), Error
 /// # Ok(()) }
 /// ```
 pub fn glob(patterns: &str) -> Result<Vec<PathBuf>, Error> {
-    use globwalk::glob;
+    use globwalk::GlobWalkerBuilder;
 
-    let files: Vec<_> = glob(patterns)?
+    let files: Vec<_> = GlobWalkerBuilder::from_patterns(".", &[patterns])
         .max_depth(1)
+        .build()?
         .into_iter()
         .filter_map(StdResult::ok)
         .map(|dir_entry| dir_entry.path().to_owned())
